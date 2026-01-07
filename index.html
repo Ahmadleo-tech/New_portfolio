@@ -3,419 +3,919 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad.</title>
-    <!-- <img src="loin.webp" alt="Logo" class="logo"> -->
+    <title>Ahmad Abdullah - Python Developer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0e27;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        .python-gradient {
+            background: linear-gradient(135deg, #4B8BBE 0%, #FFD43B 50%, #306998 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-name::before {
+            content: '>>> ';
+            color: #FFD43B;
+            font-size: 0.6em;
+        }
+
+        .hero-title {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            animation: fadeInUp 1s ease 0.2s both;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .typing-cursor {
+            animation: blink 1s infinite;
+            color: #FFD43B;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 4rem;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        .section-title::before {
+            content: '# ';
+            color: #FFD43B;
+        }
+
+        .glass-card {
+            background: rgba(75, 139, 190, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(75, 139, 190, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 212, 59, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            background: rgba(75, 139, 190, 0.08);
+            border-color: rgba(255, 212, 59, 0.4);
+            box-shadow: 0 20px 60px rgba(75, 139, 190, 0.3);
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .code-snippet {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #FFD43B;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            color: #4B8BBE;
+            margin: 2rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(75, 139, 190, 0.1);
+            border-radius: 20px;
+            border: 2px solid rgba(75, 139, 190, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #4B8BBE, #FFD43B);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .stat-card:hover::after {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            background: rgba(75, 139, 190, 0.15);
+        }
+
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+        }
+
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: rgba(75, 139, 190, 0.05);
+            border-left: 4px solid transparent;
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(75, 139, 190, 0.1);
+        }
+
+        .experience-card:nth-child(1) { border-left-color: #4B8BBE; }
+        .experience-card:nth-child(2) { border-left-color: #FFD43B; }
+        .experience-card:nth-child(3) { border-left-color: #306998; }
+        .experience-card:nth-child(4) { border-left-color: #4B8BBE; }
+
+        .experience-card:hover {
+            background: rgba(75, 139, 190, 0.1);
+            transform: translateX(10px);
+            border-color: rgba(255, 212, 59, 0.3);
+        }
+
+        .experience-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #FFD43B;
+        }
+
+        .experience-meta {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .experience-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-card li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+
+        .experience-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #4B8BBE;
+            font-weight: bold;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(75, 139, 190, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid rgba(75, 139, 190, 0.15);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4B8BBE, #FFD43B, #306998);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover:before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            background: rgba(75, 139, 190, 0.1);
+            border-color: rgba(255, 212, 59, 0.4);
+            box-shadow: 0 20px 40px rgba(75, 139, 190, 0.3);
+        }
+
+        .project-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #FFD43B;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(75, 139, 190, 0.2);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #4B8BBE;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #4B8BBE, #FFD43B);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #306998, #4B8BBE);
+            transition: left 0.3s;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(75, 139, 190, 0.5);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background: rgba(75, 139, 190, 0.05);
+            border: 2px solid rgba(75, 139, 190, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(75, 139, 190, 0.1);
+            border-color: rgba(255, 212, 59, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: #FFD43B;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(75, 139, 190, 0.2);
+            border: 1px solid rgba(75, 139, 190, 0.3);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin: 0.3rem;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 212, 59, 0.2);
+            border-color: rgba(255, 212, 59, 0.5);
+            transform: scale(1.05);
+        }
+
+        .contact-section {
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(75, 139, 190, 0.05);
+            border: 2px solid rgba(75, 139, 190, 0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #FFD43B;
+            background: rgba(75, 139, 190, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .glass-card {
+                padding: 2rem;
+            }
+
+            .projects-grid,
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: #000;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-#scene-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-}
-
-.hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.name {
-    font-size: clamp(4rem, 15vw, 12rem);
-    font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -2px;
-    background: linear-gradient(to right, #00eeff, #00ff88, #00eeff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 8s linear infinite;
-    background-size: 200% auto;
-}
-
-.title {
-    font-size: clamp(1rem, 3vw, 2rem);
-    margin-top: 2rem;
-    background: linear-gradient(to right, #00eeff, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.8;
-}
-
-.section {
-    min-height: 100vh;
-    padding: 10vh 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    width: 100%;
-    max-width: 1400px;
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    transition: all 0.5s ease;
-}
-
-.card:hover {
-    border-color: #00eeff;
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 238, 255, 0.1);
-}
-
-.project-image {
-    width: 100%;
-    height: 200px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background: linear-gradient(45deg, #00eeff, #00ff88);
-    border: none;
-    border-radius: 50px;
-    color: black;
-    font-weight: bold;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 238, 255, 0.2);
-}
-
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 4rem 0;
-    flex-wrap: wrap;
-}
-
-.stat {
-    text-align: center;
-    margin: 1rem;
-}
-
-.stat-number {
-    font-size: 3rem;
-    font-weight: bold;
-    background: linear-gradient(45deg, #00eeff, #00ff88);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.skill {
-    padding: 0.5rem 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.contact-form {
-    width: 100%;
-    max-width: 600px;
-}
-
-.input {
-    width: 100%;
-    padding: 1rem;
-    margin: 0.5rem 0;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: white;
-}
-
-/* Gradient animation for text */
-@keyframes gradient {
-    0% { background-position: 0% center; }
-    100% { background-position: 200% center; }
-}
-
-
-.tech-skill {
-  padding: 0.6rem 1.5rem;
-  background: rgba(255, 255, 255, 0.03); /* Matches other .card backgrounds */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  color: white;
-  cursor: default;
-}
-
-.tech-skill:hover {
-  background: linear-gradient(90deg, #00eeff, #00ff88);
-  color: black;
-  transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(0, 238, 255, 0.3);
-}
-
-.cert-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  max-width: 350px;
-  transition: all 0.3s ease;
-  text-align: left;
-}
-
-.cert-card:hover {
-  border-color: #00eeff;
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 238, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.cert-logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-
-
-</style>
 <body>
     <div id="scene-container"></div>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-      <div>
-        <h1 class="name">AHMAD</h1>
-        <p class="title">Python Developer • AI/ML Engineer • Software Engineer</p>
-      </div>
+        <div class="hero-content">
+            <h1 class="hero-name python-gradient">Ahmad Abdullah</h1>
+            <p class="hero-title">Python Developer | ML Engineer | Backend Architect<span class="typing-cursor">|</span></p>
+        </div>
     </section>
 
-    <!-- About Me -->
-    <section class="section" id="about">
-  <div class="card" style="max-width: 900px; text-align: center; padding: 2rem;">
-    <img src="static/gk.jpeg" alt="Ahmad Leo" style="width: 180px; height: 180px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover; border: 2px solid #00eeff;" />
-    <h2 style="margin-bottom: 1rem;">👋 About Me</h2>
-    <p style="font-size: 1rem; line-height: 1.7; max-width: 700px; margin: 0 auto;">
-      I’m <strong>Ahmad Abdullah</strong>, a <strong>Computer Science student at FAST NUCES</strong> with hands-on experience in <strong>Python, Machine Learning, and Backend Development</strong>.<br><br>
-      I’ve completed multiple internships as a <strong>Software Development Engineer, Data Analyst,</strong> and <strong>ML Engineer</strong>, where I built scalable APIs, automated workflows, and predictive models on datasets with 100k+ records.<br><br>
-      With <strong>25+ GitHub projects</strong> and several hackathon participations, I’ve developed practical expertise in <strong>Flask, Data Science, AI/ML, and API Development</strong>. My focus is on delivering <strong>efficient backend systems</strong> and <strong>AI-powered applications</strong> that solve real-world problems.
-    </p>
+    <!-- About -->
+    <section class="section">
+        <div class="container">
+            <div class="glass-card">
+                <h2 class="section-title python-gradient">About Me</h2>
+                <div class="code-snippet">
+                    <span style="color: #FFD43B;">class</span> <span style="color: #4B8BBE;">PythonDeveloper</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FFD43B;">def</span> <span style="color: #4B8BBE;">__init__</span>(self):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = <span style="color: #FFD43B;">"Ahmad Abdullah"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.role = <span style="color: #FFD43B;">"Python Developer"</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.year = <span style="color: #FFD43B;">2026</span>
+                </div>
+                <p class="about-text">
+                    Computer Science student at FAST NUCES and SDE Mentee at Dev Weekends, specializing in Python-powered solutions. I build scalable backend systems with Flask and FastAPI, develop production-ready ML models with scikit-learn and TensorFlow, and architect data pipelines that transform raw data into actionable insights.
+                </p>
+                <p class="about-text">
+                    With 10+ professional internships including roles at Fiverr, Softsincs, and MKA AI, I've shipped Python applications that process millions of data points daily. My expertise spans REST API development, ETL pipeline engineering, and deploying ML models that drive real business value in 2026's AI-first landscape.
+                </p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number python-gradient">25+</div>
+                        <div class="stat-label">Python Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number python-gradient">10+</div>
+                        <div class="stat-label">Industry Internships</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number python-gradient">5+</div>
+                        <div class="stat-label">Hackathon Wins</div>
+                    </div>
+                </div>
 
-    <!-- Stats -->
-    <div class="stats" style="display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;">
-      <div class="stat">
-        <div class="stat-number">25+</div>
-        <div>GitHub Projects</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">7+</div>
-        <div>Professional Internships</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">10+</div>
-        <div>Technologies Mastered</div>
-      </div>
-    </div>
-  </div>
-</section>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="btn" target="_blank"><span>View Resume</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Resume Download -->
-    <div style="display: flex; justify-content: center; margin-top: 2rem;">
-  <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" 
-     class="btn"
-     target="_blank"
-     style="padding: 0.75rem 1.5rem; background-color: #00eeff; color: #000; border-radius: 5px; text-decoration: none; font-weight: bold;">
-    📄 Download Resume
-  </a>
-</div>
+    <!-- Experience -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title python-gradient">Experience</h2>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3 class="experience-title">Python Developer – Fiverr</h3>
+                    <p class="experience-meta">Nov 2025 – Present • Remote</p>
+                    <ul>
+                        <li>Architecting scalable REST APIs using Flask and FastAPI with async/await patterns</li>
+                        <li>Building ETL pipelines with Pandas, NumPy, and Apache Airflow for data workflows</li>
+                        <li>Deploying ML models with scikit-learn and TensorFlow for production environments</li>
+                        <li>Managing PostgreSQL and MongoDB databases with SQLAlchemy and PyMongo</li>
+                    </ul>
+                </div>
 
+                <div class="experience-card">
+                    <h3 class="experience-title">SDE Mentee – Dev Weekends</h3>
+                    <p class="experience-meta">Nov 2025 – Present • Pakistan</p>
+                    <ul>
+                        <li>Intensive 4-month program with focus on Python DSA implementation and system design</li>
+                        <li>Working with industry mentors on backend architecture patterns and best practices</li>
+                        <li>Building production-grade Python applications following SOLID principles</li>
+                    </ul>
+                </div>
 
-   <!-- Experience -->
-    <section class="section" id="experience">
-  <div class="card" style="max-width: 900px; margin: 0 auto; text-align: left;">
-    <h2 style="text-align: center; margin-bottom: 2rem;">💼 Professional Experience</h2>
+                <div class="experience-card">
+                    <h3 class="experience-title">ML/Data Engineer – Softsincs</h3>
+                    <p class="experience-meta">Aug 2025 – Sep 2025 • Lahore</p>
+                    <ul>
+                        <li>Engineered data pipelines using Python with Pandas, Polars, and Dask for big data processing</li>
+                        <li>Built production ML systems with scikit-learn, XGBoost, and LightGBM</li>
+                        <li>Implemented feature engineering pipelines that improved model accuracy by 23%</li>
+                    </ul>
+                </div>
 
-    <!-- Bluestock.in -->
-    <div class="experience-item" style="margin-bottom: 2rem;">
-      <h3 style="margin-bottom: 0.3rem;">💻 Software Development Engineer Intern – Bluestock.in</h3>
-      <p style="color: #888; margin-top: 0;">Oct 2025 – Present · Remote</p>
-      <ul style="margin-top: 0.5rem; line-height: 1.6;">
-        <li>Developed and maintained scalable backend APIs and microservices using Flask and Node.js.</li>
-        <li>Improved endpoint performance and reduced response latency through query optimization and caching.</li>
-        <li>Collaborated with frontend engineers to deliver production features and integrate APIs with consumer-facing UI.</li>
-      </ul>
-    </div>
-
-    <!-- MKA AI -->
-    <div class="experience-item" style="margin-bottom: 2rem;">
-      <h3 style="margin-bottom: 0.3rem;">🤖 ML/Data Intern – MKA AI</h3>
-      <p style="color: #888; margin-top: 0;">Aug 2025 – Sep 2025 · Remote</p>
-      <ul style="margin-top: 0.5rem; line-height: 1.6;">
-        <li>Developed predictive models using scikit-learn and pandas, handling datasets with 100k+ records.</li>
-        <li>Performed data preprocessing, feature selection, and model evaluation, enhancing accuracy by 15%.</li>
-        <li>Collaborated on real-world ML projects and shared results on Kaggle to demonstrate model performance.</li>
-      </ul>
-    </div>
-
-    <!-- Eleevo Pathways -->
-    <div class="experience-item">
-      <h3 style="margin-bottom: 0.3rem;">📊 Data Analyst Intern – Eleevo Pathways</h3>
-      <p style="color: #888; margin-top: 0;">Jul 2025 – Aug 2025 · Remote</p>
-      <ul style="margin-top: 0.5rem; line-height: 1.6;">
-        <li>Analyzed large datasets using Python, pandas, and NumPy to extract actionable insights.</li>
-        <li>Visualized business trends with Matplotlib and Seaborn to support strategic decision-making.</li>
-        <li>Automated data workflows and generated reports, reducing manual time by 40% and increasing efficiency.</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
+                <div class="experience-card">
+                    <h3 class="experience-title">Data Analyst – Elevvo Pathways</h3>
+                    <p class="experience-meta">Jul 2025 – Aug 2025 • Remote</p>
+                    <ul>
+                        <li>Automated data workflows with Python scripts, reducing manual effort by 40%</li>
+                        <li>Created interactive dashboards using Plotly and Dash for real-time analytics</li>
+                        <li>Performed statistical analysis with SciPy and statsmodels for business insights</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Projects -->
-<section class="section" id="work">
-  <div class="grid">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title python-gradient">Featured Python Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Student AI Assistant 2.0</h3>
+                    <div>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">OpenAI</span>
+                        <span class="project-tag">NLP</span>
+                    </div>
+                    <p>AI-powered academic companion built with Flask, featuring adaptive Q&A using LangChain, automated study planning, and voice interaction with Whisper API. Winner at VibeCode's VIDE-E-THON Hackathon 2025.</p>
+                    <a href="https://github.com/ck-ahmad/Student-Assistant-2.0" class="btn" target="_blank"><span>View Project</span></a>
+                </div>
 
-    <div class="card">
-      <h3>🚀 AstroHub</h3>
-      <p>GitHub-inspired portfolio platform with authentication, project showcases, and downloadable resources. 
-        <strong>Tech:</strong> ⚙️ Flask · 🗄️ SQLAlchemy · 💾 MySQL
-      </p>
-      <a href="https://github.com/ck-ahmad/AstroHub" class="btn" target="_blank">🔗 View Project</a>
-    </div>
+                <div class="project-card">
+                    <h3>AI Note Generator</h3>
+                    <div>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Gemini API</span>
+                        <span class="project-tag">ETL</span>
+                        <span class="project-tag">FastAPI</span>
+                    </div>
+                    <p>Production ETL pipeline transforming lecture audio into summarized, multi-language notes. Built with FastAPI, Pandas for data processing, and Google's Gemini API for intelligent summarization.</p>
+                    <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="btn" target="_blank"><span>View Project</span></a>
+                </div>
 
-    <div class="card">
-      <h3>📂 Google Drive (DSA Project)</h3>
-      <p>C++ simulation of Google Drive featuring file management, search, and storage optimization. 
-        <strong>Tech:</strong> 💻 C++ · 🏗️ OOP · 📊 DSA
-      </p>
-      <a href="https://github.com/ck-ahmad/Google_drive" class="btn" target="_blank">🔗 View Project</a>
-    </div>
+                <div class="project-card">
+                    <h3>Carbon Emission Tracker</h3>
+                    <div>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">ML</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">Pandas</span>
+                    </div>
+                    <p>Real-time carbon footprint tracking system with predictive ML models using scikit-learn. Features REST API built with Flask and interactive visualizations with Plotly. $100 winner at Bay2BayHacks 2025.</p>
+                    <a href="#" class="btn" target="_blank"><span>View Project</span></a>
+                </div>
 
-    <div class="card">
-      <h3>🎓 Student Assistant</h3>
-      <p>AI-powered assistant with voice commands, intelligent note-taking, and student productivity tools. 
-        <strong>Tech:</strong> 🐍 Python · ⚙️ Flask · 🎙️ Speech Recognition
-      </p>
-      <a href="https://github.com/Ahmadleo-tech/Student-Assistant-Helper-" class="btn" target="_blank">🔗 View Project</a>
-    </div>
+                <div class="project-card">
+                    <h3>AstroHub</h3>
+                    <div>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">SQLAlchemy</span>
+                        <span class="project-tag">PostgreSQL</span>
+                    </div>
+                    <p>Full-stack portfolio platform inspired by GitHub, featuring JWT authentication, project showcases, and user management. Built with Flask, SQLAlchemy ORM, and PostgreSQL backend.</p>
+                    <a href="https://github.com/ck-ahmad/AstroHub" class="btn" target="_blank"><span>View Project</span></a>
+                </div>
 
-  </div>
-</section>
-    
-    <section class="section" id="tech-stack">
-  <div class="card" style="text-align: center;">
-    <h2 style="margin-bottom: 2rem;">💡 Technical Skills</h2>
-    <div class="skills" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 900px; margin: 0 auto;">
+                <div class="project-card">
+                    <h3>Tony AI 1.0</h3>
+                    <div>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">NLP</span>
+                        <span class="project-tag">APIs</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                    <p>Voice-controlled personal assistant with task scheduling, weather integration, and automation capabilities. Implemented using Python's speech recognition and natural language processing libraries. Top 10 at IIT Kanpur TechFest.</p>
+                    <a href="#" class="btn" target="_blank"><span>View Project</span></a>
+                </div>
 
-      <div class="skill tech-skill">💻 <strong>Languages:</strong> Python · C++ · JavaScript · HTML5 · CSS3 · SQL</div>
-      <div class="skill tech-skill">⚙️ <strong>Frameworks:</strong> Flask · Bootstrap · SQLAlchemy · Node.js · Express.js</div>
-      <div class="skill tech-skill">🧠 <strong>AI / ML Tools:</strong> Scikit-Learn · Pandas · NumPy · Matplotlib · Seaborn · NLP · Speech Recognition · TTS</div>
-      <div class="skill tech-skill">📦 <strong>Data Engineering:</strong> ETL · ELT · PySpark · Data Pipelines</div>
-      <div class="skill tech-skill">🗄️ <strong>Databases:</strong> MySQL · MongoDB · Database Design · Migration · Flask-Migrate</div>
-      <div class="skill tech-skill">🔗 <strong>Backend:</strong> REST APIs · Jinja2 · Database Integration</div>
-      <div class="skill tech-skill">🛠️ <strong>Tools:</strong> Git · GitHub · VS Code · Visual Studio · Postman</div>
-
-    </div>
-  </div>
-</section>
-
-
-    <!-- Social Links -->
-    <section class="section" id="socials">
-      <div class="grid">
-        <div class="card"><h3>GitHub</h3><p>Explore my open-source work.</p><a href="https://github.com/ck-ahmad" class="btn">Visit GitHub</a></div>
-        <div class="card"><h3>LinkedIn</h3><p>Connect professionally and view my career journey.</p><a href="https://linkedin.com/in/ahmad0763" class="btn">Visit LinkedIn</a></div>
-        <div class="card"><h3>Discord</h3><p>Follow my latest development updates, projects, and collaborations on Discord.</p><a href="https://discord.com/users/ck_ah" class="btn">Visit Discord</a></div>
-      </div>
+                <div class="project-card">
+                    <h3>Predictive Analytics Dashboard</h3>
+                    <div>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Dash</span>
+                        <span class="project-tag">ML</span>
+                        <span class="project-tag">Plotly</span>
+                    </div>
+                    <p>Interactive analytics dashboard built with Plotly Dash, featuring real-time predictions using trained ML models. Includes data preprocessing with Pandas and model deployment with scikit-learn pipelines.</p>
+                    <a href="#" class="btn" target="_blank"><span>View Project</span></a>
+                </div>
+            </div>
+        </div>
     </section>
 
-  
+    <!-- Skills -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title python-gradient">Python Tech Stack</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Core Python</h3>
+                    <div>
+                        <span class="skill-tag">Python 3.12+</span>
+                        <span class="skill-tag">Asyncio</span>
+                        <span class="skill-tag">Type Hints</span>
+                        <span class="skill-tag">OOP</span>
+                    </div>
+                </div>
 
-<!-- Contact -->
-<section class="section" id="contact">
-  <div class="card" style="max-width: 900px; text-align: center;">
-    <h2 style="margin-bottom: 2rem;">📬 Contact Me</h2>
-    <p>Let’s work together or discuss an opportunity.</p>
-    
-    <form id="contact-form" style="display: flex; flex-direction: column; gap: 1rem; max-width: 500px; margin: 2rem auto;">
-      <input type="text" name="from_name" placeholder="Your Name" required style="padding: 0.75rem; border-radius: 5px; border: 1px solid #00eeff;">
-      <input type="email" name="from_email" placeholder="Your Email" required style="padding: 0.75rem; border-radius: 5px; border: 1px solid #00eeff;">
-      <textarea name="message" rows="5" placeholder="Your Message" required style="padding: 0.75rem; border-radius: 5px; border: 1px solid #00eeff;"></textarea>
-      <button type="submit" class="btn" style="padding: 0.75rem; background-color: #00eeff; color: #000; border: none; border-radius: 5px; font-weight: bold;">Send Message</button>
-    </form>
-    <p>Let’s work together or discuss an opportunity.</p>
-    <p>📧 <strong>ahmadleo498@gmail.com</strong></p>
-    <p id="form-status" style="margin-top: 1rem; color: #00eeff;"></p>
-  </div>
-</section>
+                <div class="skill-category">
+                    <h3>Web Frameworks</h3>
+                    <div>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Django</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
 
+                <div class="skill-category">
+                    <h3>Data Science</h3>
+                    <div>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">SciPy</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Plotly</span>
+                    </div>
+                </div>
 
+                <div class="skill-category">
+                    <h3>Machine Learning</h3>
+                    <div>
+                        <span class="skill-tag">Scikit-Learn</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">XGBoost</span>
+                    </div>
+                </div>
 
-    <!-- Footer -->
-    <footer style="text-align: center; padding: 1rem 0; font-size: 0.8rem; color: gray;">
-        &copy; 2025 Ahmad Leo — All Rights Reserved
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">SQLAlchemy</span>
+                        <span class="skill-tag">Redis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>DevOps & Tools</h3>
+                    <div>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Pytest</span>
+                        <span class="skill-tag">CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section">
+        <div class="container">
+            <h2 class="section-title python-gradient">Let's Connect</h2>
+            <div class="contact-form">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="from_name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="from_email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn"><span>Send Message</span></button>
+                </form>
+                <p id="form-status" style="margin-top: 1rem; color: #FFD43B; font-family: 'JetBrains Mono', monospace;"></p>
+                
+                <p style="margin-top: 3rem; font-size: 1.1rem; color: rgba(255, 255, 255, 0.6);">
+                    ahmadleo498@gmail.com
+                </p>
+
+                <div class="social-links">
+                    <a href="https://github.com/ck-ahmad" class="btn" target="_blank"><span>GitHub</span></a>
+                    <a href="https://linkedin.com/in/ahmad0763" class="btn" target="_blank"><span>LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Ahmad Abdullah | Built with Python 🐍
     </footer>
 
-<!-- ✅ EmailJS + Three.js + GSAP Combined Script -->
-<!-- ✅ External Libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-<script src="https://cdn.emailjs.com/sdk/3.11.0/email.min.js"></script>
+    <script>
+        // Three.js Python-themed particle system
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('scene-container').appendChild(renderer.domElement);
 
-<!-- ✅ Your JS Files -->
-<script src="3js.js"></script>
-<script src="email.js"></script>
+        // Create dual-colored particles (Python blue and yellow)
+        const blueParticles = new THREE.BufferGeometry();
+        const yellowParticles = new THREE.BufferGeometry();
+        const particlesCount = 1500;
+        
+        const bluePosArray = new Float32Array(particlesCount * 3);
+        const yellowPosArray = new Float32Array(particlesCount * 3);
 
+        for(let i = 0; i < particlesCount * 3; i++) {
+            bluePosArray[i] = (Math.random() - 0.5) * 120;
+            yellowPosArray[i] = (Math.random() - 0.5) * 120;
+        }
+
+        blueParticles.setAttribute('position', new THREE.BufferAttribute(bluePosArray, 3));
+        yellowParticles.setAttribute('position', new THREE.BufferAttribute(yellowPosArray, 3));
+
+        const blueMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            color: 0x4B8BBE,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const yellowMaterial = new THREE.PointsMaterial({
+            size: 0.08,
+            color: 0xFFD43B,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+
+        const blueMesh = new THREE.Points(blueParticles, blueMaterial);
+        const yellowMesh = new THREE.Points(yellowParticles, yellowMaterial);
+        
+        scene.add(blueMesh);
+        scene.add(yellowMesh);
+
+        camera.position.z = 50;
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            blueMesh.rotation.x += 0.0002;
+            blueMesh.rotation.y += 0.0003;
+            
+            yellowMesh.rotation.x -= 0.0001;
+            yellowMesh.rotation.y -= 0.0002;
+
+            targetX += (mouseX * 10 - targetX) * 0.02;
+            targetY += (-mouseY * 10 - targetY) * 0.02;
+
+            camera.position.x = targetX;
+            camera.position.y = targetY;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Form handler
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const status = document.getElementById('form-status');
+            status.textContent = '✓ Message sent successfully!';
+            this.reset();
+            setTimeout(() => status.textContent = '', 4000);
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card, .experience-card, .project-card, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
