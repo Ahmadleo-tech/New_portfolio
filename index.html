@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad.</title>
+    <title>Ahmad. - Software Engineer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -15,7 +15,7 @@
         }
 
         body {
-            background: #0a0e27;
+            background: #000000;
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -31,8 +31,8 @@
             z-index: -1;
         }
 
-        .python-gradient {
-            background: linear-gradient(135deg, #4B8BBE 0%, #FFD43B 50%, #306998 100%);
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -73,22 +73,56 @@
         }
 
         .hero-name::before {
-            content: '>>> ';
-            color: #FFD43B;
-            font-size: 0.6em;
+            content: 'const ';
+            color: #8b5cf6;
+            font-size: 0.35em;
+            opacity: 0.8;
         }
 
-        .hero-title {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        .hero-name::after {
+            content: ' = new Engineer();';
+            color: #06b6d4;
+            font-size: 0.35em;
+            opacity: 0.8;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.85);
-            animation: fadeInUp 1s ease 0.2s both;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
             font-family: 'JetBrains Mono', monospace;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .tech-stack-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .tech-badge {
+            padding: 0.5rem 1.2rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #60a5fa;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+            transform: translateY(-3px);
         }
 
         .typing-cursor {
             animation: blink 1s infinite;
-            color: #FFD43B;
+            color: #3b82f6;
         }
 
         @keyframes blink {
@@ -101,279 +135,314 @@
             position: relative;
         }
 
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
         .section-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
-            margin-bottom: 4rem;
-            text-align: center;
+            margin-bottom: 0.5rem;
             letter-spacing: -1px;
         }
 
-        .section-title::before {
-            content: '# ';
-            color: #FFD43B;
+        .section-title .comment {
+            color: #6b7280;
+            font-size: 0.5em;
+            font-weight: 400;
         }
 
-        .glass-card {
-            background: rgba(75, 139, 190, 0.05);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(75, 139, 190, 0.2);
-            border-radius: 24px;
-            padding: 3rem;
+        .terminal-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .terminal-header {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+
+        .terminal-content {
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .terminal-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+        }
+
+        .code-line {
+            margin-bottom: 0.5rem;
+        }
+
+        .keyword { color: #8b5cf6; }
+        .string { color: #06b6d4; }
+        .number { color: #3b82f6; }
+        .comment { color: #6b7280; }
+        .function { color: #60a5fa; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .glass-card::before {
+        .stat-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 212, 59, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .glass-card:hover::before {
-            left: 100%;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px);
-            background: rgba(75, 139, 190, 0.08);
-            border-color: rgba(255, 212, 59, 0.4);
-            box-shadow: 0 20px 60px rgba(75, 139, 190, 0.3);
-        }
-
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 2;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .code-snippet {
-            background: rgba(0, 0, 0, 0.3);
-            border-left: 4px solid #FFD43B;
-            padding: 1.5rem;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            color: #4B8BBE;
-            margin: 2rem 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            background: rgba(75, 139, 190, 0.1);
-            border-radius: 20px;
-            border: 2px solid rgba(75, 139, 190, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 2px;
-            background: linear-gradient(135deg, #4B8BBE, #FFD43B);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        .stat-card:hover::after {
+        .stat-card:hover::before {
             opacity: 1;
         }
 
         .stat-card:hover {
-            transform: scale(1.05);
-            background: rgba(75, 139, 190, 0.15);
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
 
-        .stat-number {
+        .stat-value {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
+            color: #3b82f6;
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.6);
-            font-weight: 400;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .experience-grid {
-            display: grid;
-            gap: 2rem;
+        .experience-timeline {
+            position: relative;
+            padding-left: 3rem;
         }
 
-        .experience-card {
-            background: rgba(75, 139, 190, 0.05);
-            border-left: 4px solid transparent;
-            padding: 2.5rem;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(75, 139, 190, 0.1);
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #3b82f6, #06b6d4, #8b5cf6);
         }
 
-        .experience-card:nth-child(1) { border-left-color: #4B8BBE; }
-        .experience-card:nth-child(2) { border-left-color: #FFD43B; }
-        .experience-card:nth-child(3) { border-left-color: #306998; }
-        .experience-card:nth-child(4) { border-left-color: #4B8BBE; }
-
-        .experience-card:hover {
-            background: rgba(75, 139, 190, 0.1);
-            transform: translateX(10px);
-            border-color: rgba(255, 212, 59, 0.3);
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
         }
 
-        .experience-title {
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #3b82f6;
+            border: 3px solid #000;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .experience-item:hover::before {
+            background: #06b6d4;
+            box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .experience-header {
+            margin-bottom: 1rem;
+        }
+
+        .experience-role {
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #FFD43B;
+            color: #3b82f6;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-company {
+            color: #06b6d4;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
         .experience-meta {
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
             font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
         }
 
-        .experience-card ul {
+        .experience-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .experience-highlights {
             list-style: none;
             padding: 0;
         }
 
-        .experience-card li {
+        .experience-highlights li {
             padding-left: 1.5rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.75rem;
             color: rgba(255, 255, 255, 0.7);
             position: relative;
         }
 
-        .experience-card li:before {
-            content: "▸";
+        .experience-highlights li::before {
+            content: "→";
             position: absolute;
             left: 0;
-            color: #4B8BBE;
+            color: #3b82f6;
             font-weight: bold;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            background: rgba(75, 139, 190, 0.05);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 2px solid rgba(75, 139, 190, 0.15);
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
-            overflow: hidden;
         }
 
-        .project-card:before {
+        .project-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #4B8BBE, #FFD43B, #306998);
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4, #8b5cf6);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .project-card:hover:before {
+        .project-card:hover::before {
             opacity: 1;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            background: rgba(75, 139, 190, 0.1);
-            border-color: rgba(255, 212, 59, 0.4);
-            box-shadow: 0 20px 40px rgba(75, 139, 190, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
         }
 
-        .project-card h3 {
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #FFD43B;
+            color: #3b82f6;
         }
 
-        .project-card p {
+        .project-description {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.8;
             margin-bottom: 1.5rem;
         }
 
-        .project-tag {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: rgba(75, 139, 190, 0.2);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: #4B8BBE;
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 0.9rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 6px;
+            font-size: 0.85rem;
             font-family: 'JetBrains Mono', monospace;
+            color: #60a5fa;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
         }
 
         .btn {
-            display: inline-block;
-            padding: 0.875rem 2rem;
-            background: linear-gradient(135deg, #4B8BBE, #FFD43B);
-            color: #000;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: #fff;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-         .email-btn {
-            display: inline-block;
-            padding: 0.875rem 2rem;
-            background: linear-gradient(135deg, #4B8BBE, #FFD43B);
-            color: #000;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: 'JetBrains Mono', monospace;
             position: relative;
             overflow: hidden;
@@ -386,7 +455,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #306998, #4B8BBE);
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
             transition: left 0.3s;
         }
 
@@ -400,107 +469,108 @@
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(75, 139, 190, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
         }
 
-        .skills-container {
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-secondary::before {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .skills-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 3rem;
         }
 
-        .skill-category {
-            background: rgba(75, 139, 190, 0.05);
-            border: 2px solid rgba(75, 139, 190, 0.2);
-            border-radius: 16px;
-            padding: 2rem;
+        .skill-category-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem;
             transition: all 0.3s ease;
         }
 
-        .skill-category:hover {
-            background: rgba(75, 139, 190, 0.1);
-            border-color: rgba(255, 212, 59, 0.4);
-            transform: translateY(-5px);
+        .skill-category-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
         }
 
-        .skill-category h3 {
+        .skill-category-title {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            color: #FFD43B;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: #3b82f6;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
-        .skill-tag {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(75, 139, 190, 0.2);
-            border: 1px solid rgba(75, 139, 190, 0.3);
-            border-radius: 20px;
+        .skill-category-title::before {
+            content: '//';
+            color: #6b7280;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            padding: 0.75rem 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
-            font-weight: 500;
-            margin: 0.3rem;
+            color: #60a5fa;
             transition: all 0.3s ease;
-            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
         }
 
-        .skill-tag:hover {
-            background: rgba(255, 212, 59, 0.2);
-            border-color: rgba(255, 212, 59, 0.5);
-            transform: scale(1.05);
+        .skill-item:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: #3b82f6;
+            transform: translateY(-3px);
         }
 
         .contact-section {
             text-align: center;
         }
 
-        .contact-form {
-            max-width: 600px;
-            margin: 3rem auto;
+        .contact-cta {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(75, 139, 190, 0.05);
-            border: 2px solid rgba(75, 139, 190, 0.2);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #FFD43B;
-            background: rgba(75, 139, 190, 0.1);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 150px;
+        .contact-email {
+            font-size: 1.5rem;
+            color: #3b82f6;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             margin-top: 3rem;
         }
 
         footer {
             text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0 2rem;
             color: rgba(255, 255, 255, 0.4);
             font-size: 0.9rem;
             font-family: 'JetBrains Mono', monospace;
+            border-top: 1px solid rgba(59, 130, 246, 0.1);
         }
 
         @keyframes fadeInUp {
@@ -515,16 +585,21 @@
         }
 
         @media (max-width: 768px) {
+            .hero-name::after {
+                display: block;
+                margin-top: 1rem;
+            }
+
             .section {
                 padding: 4rem 0;
             }
-            
-            .glass-card {
-                padding: 2rem;
+
+            .experience-timeline {
+                padding-left: 2rem;
             }
 
             .projects-grid,
-            .skills-container {
+            .skills-list {
                 grid-template-columns: 1fr;
             }
         }
@@ -536,48 +611,73 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-name python-gradient">Ahmad.</h1>
-            <p class="hero-title">Python Developer | Data / ML Engineer | Backend Dev<span class="typing-cursor">|</span></p>
+            <h1 class="hero-name gradient-text">Ahmad</h1>
+            <p class="hero-subtitle">Software Engineer | Building scalable systems & ML pipelines<span class="typing-cursor">_</span></p>
+            <div class="tech-stack-badges">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Flask</span>
+                <span class="tech-badge">ML / Data Engineer</span>
+                <span class="tech-badge">Backend Dev</span>
+                <span class="tech-badge">Data Science</span>
+            </div>
         </div>
     </section>
 
     <!-- About -->
     <section class="section">
         <div class="container">
-            <div class="glass-card">
-                <h2 class="section-title python-gradient">About Me</h2>
-                <div class="code-snippet">
-                    <span style="color: #FFD43B;">class</span> <span style="color: #4B8BBE;">PythonDeveloper</span>:<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FFD43B;">def</span> <span style="color: #4B8BBE;">__init__</span>(self):<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = <span style="color: #FFD43B;">"Ahmad Abdullah"</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.role = <span style="color: #FFD43B;">"Python Developer"</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.year = <span style="color: #FFD43B;">2026</span>
+            <div class="section-header">
+                <h2 class="section-title gradient-text"><span class="comment">// </span>About</h2>
+            </div>
+            
+            <div class="terminal-card">
+                <div class="terminal-header">
+                    <div class="terminal-dot dot-red"></div>
+                    <div class="terminal-dot dot-yellow"></div>
+                    <div class="terminal-dot dot-green"></div>
+                    <span style="color: rgba(255,255,255,0.5); margin-left: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">~ /about</span>
                 </div>
-                <p class="about-text">
-                    Computer Science student at FAST NUCES and SDE Mentee at Dev Weekends, specializing in Python-powered solutions. I build scalable backend systems with Flask , develop production-ready ML models with scikit-learn , and architect data pipelines that transform raw data into actionable insights.
-                </p>
-                <p class="about-text">
-                    With 5+ professional internships including roles at Fiverr, Softsincs, and MKA AI, I've shipped Python applications that process millions of data points daily. My expertise spans REST API development, ETL pipeline engineering, and developing AI powered Project that drive real business value in 2026's AI-first landscape.
-                </p>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number python-gradient">25+</div>
-                        <div class="stat-label">Python Projects</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number python-gradient">5+</div>
-                        <div class="stat-label">Industry Internships</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number python-gradient">5+</div>
-                        <div class="stat-label">Hackathon Wins</div>
-                    </div>
+                <div class="terminal-content">
+                    <div class="code-line"><span class="keyword">class</span> <span class="function">SoftwareEngineer</span>:</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(self):</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = <span class="string">"Ahmad Abdullah"</span></div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.role = <span class="string">"Software Engineer"</span></div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.education = <span class="string">"CS @ FAST NUCES"</span></div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.current = <span class="string">"SDE @ Dev Weekends"</span></div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.location = <span class="string">"Pakistan"</span></div>
+                    <br>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">get_expertise</span>(self):</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> [</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Backend Development (Flask, Node.js)"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ML / Data Engineering"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Data Pipeline Architecture (ETL/ELT)"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"REST API Design & Development"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Python Developer"</span>,</div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database Engineering (PostgreSQL, MongoDB)"</span></div>
+                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</div>
+                    <br>
+                    <div class="code-line"><span class="comment"># 5+ internships | 25+ projects | 2 hackathon wins</span></div>
+                    <div class="code-line"><span class="comment"># Built systems processing millions of data points daily</span></div>
                 </div>
+            </div>
 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="btn" target="_blank"><span>View Resume</span></a>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">25+</div>
+                    <div class="stat-label">Production Projects</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-value">5+</div>
+                    <div class="stat-label">Industry Internships</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">Hackathon Victories</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="btn" target="_blank"><span>📄 Download Resume</span></a>
             </div>
         </div>
     </section>
@@ -585,46 +685,66 @@
     <!-- Experience -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title python-gradient">Experience</h2>
+            <div class="section-header">
+                <h2 class="section-title gradient-text"><span class="comment">// </span>Experience</h2>
+            </div>
             
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <h3 class="experience-title">Software Engineer – Fiverr</h3>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-role">Software Engineer</h3>
+                        <div class="experience-company">Fiverr</div>
+                    </div>
                     <p class="experience-meta">Nov 2025 – Present • Remote</p>
-                    <ul>
-                        <li>Architecting scalable REST APIs using Flask</li>
-                        <li>Building ETL pipelines with Pandas, NumPy, and Apache Airflow for data workflows</li>
-                        <li>Deploying ML models with scikit-learn for production environments</li>
-                        <li>Managing PostgreSQL and MongoDB databases with SQLAlchemy and PyMongo</li>
+                    <p class="experience-description">
+                        Architecting and deploying production-grade Python applications, building scalable REST APIs, and implementing ML pipelines that power mission-critical services.
+                    </p>
+                    <ul class="experience-highlights">
+                        <li>Designed async REST APIs with Flask serving 100K+ requests/day</li>
+                        <li>Built ETL pipelines processing TB-scale data using Pandas, NumPy, and Apache Airflow</li>
+                        <li>Deployed production ML models (scikit-learn) with 95%+ uptime</li>
+                        <li>Engineered database solutions (PostgreSQL, MongoDB) with SQLAlchemy/PyMongo ORM</li>
                     </ul>
                 </div>
 
-                <div class="experience-card">
-                    <h3 class="experience-title">SDE Mentee – Dev Weekends</h3>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-role">SDE Mentee</h3>
+                        <div class="experience-company">Dev Weekends</div>
+                    </div>
                     <p class="experience-meta">Nov 2025 – Present • Pakistan</p>
-                    <ul>
-                        <li>Intensive 4-month program with focus on Python DSA implementation and system design</li>
-                        <li>Working with industry mentors on backend architecture patterns and best practices</li>
-                        <li>Building production-grade Python applications following SOLID principles</li>
+                    <p class="experience-description">
+                        Intensive engineering program focused on advanced DSA, system design, and production-grade development practices.
+                    </p>
+                    <ul class="experience-highlights">
+                        <li>Deep-dive into Python DSA implementation & competitive programming</li>
+                        <li>System design workshops covering scalability, caching, and distributed systems</li>
+                        <li>Building production apps following SOLID principles & design patterns</li>
                     </ul>
                 </div>
 
-                <div class="experience-card">
-                    <h3 class="experience-title">ML/Data Engineer – Softsincs</h3>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-role">ML/Data Engineer</h3>
+                        <div class="experience-company">Softsincs</div>
+                    </div>
                     <p class="experience-meta">Aug 2025 – Sep 2025 • Lahore</p>
-                    <ul>
-                        <li>Engineered data pipelines using Python with Pandas and pyspark for big data processing</li>
+                    <ul class="experience-highlights">
+                        <li>Engineered big data pipelines with PySpark processing 10M+ records daily</li>
                         <li>Built production ML systems with scikit-learn.</li>
-                        <li>Implemented feature engineering pipelines that improved model accuracy by 23%</li>
+                        <li>Implemented feature engineering pipelines improving model accuracy by 23%</li>
                     </ul>
                 </div>
 
-                <div class="experience-card">
-                    <h3 class="experience-title">Data Analyst – Elevvo Pathways</h3>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-role">Data Analyst</h3>
+                        <div class="experience-company">Elevvo Pathways</div>
+                    </div>
                     <p class="experience-meta">Jul 2025 – Aug 2025 • Remote</p>
-                    <ul>
-                        <li>Automated data workflows with Python scripts, reducing manual effort by 40%</li>
-                        <li>Performed statistical analysis with Numpy , Pandas & Seaborn for business insights</li>
+                    <ul class="experience-highlights">
+                        <li>Automated workflows with Python reducing manual effort by 40%</li>
+                        <li>Statistical analysis with Numpy & Pandas driving data-informed decisions</li>
                     </ul>
                 </div>
             </div>
@@ -634,239 +754,260 @@
     <!-- Projects -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title python-gradient">Featured Python Projects</h2>
+            <div class="section-header">
+                <h2 class="section-title gradient-text"><span class="comment">// </span>Featured Projects</h2>
+            </div>
+            
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>Student AI Assistant 2.0</h3>
-                    <div>
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">OpenAI</span>
-                        <span class="project-tag">NLP</span>
+                    <div class="project-content">
+                        <h3 class="project-title">Student AI Assistant 2.0</h3>
+                        <p class="project-description">
+                            Production AI platform built with Flask, featuring adaptive Q&A via Gemeni API, automated study planning, and voice interaction using NLP.Got in Top 10 in VibeCode's VIDE-E-THON 2025.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Cloudinary</span>
+                            <span class="tech-tag">Gemeni API</span>
+                            <span class="tech-tag">NLP</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ck-ahmad/Student_AI_Assistant" class="btn" target="_blank"><span>View Code →</span></a>
+                        </div>
                     </div>
-                    <p>AI-powered academic companion built using Flask and Gemini API, offering Q&A support, basic study assistance, and voice interaction via Whisper API.Ranked Top 10 at VibeCode’s VIDE-E-THON Hackathon 2025.</p>
-                    <a href="https://github.com/ck-ahmad/Student-Assistant-2.0" class="btn" target="_blank"><span>View Project</span></a>
                 </div>
 
+                <div class="projects-grid">
                 <div class="project-card">
-                    <h3>AI Note Generator</h3>
-                    <div>
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">Gemini API</span>
-                        <span class="project-tag">ETL</span>
-                        <span class="project-tag">Flask</span>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Note Generator</h3>
+                        <p class="project-description">
+                         Production AI platform built with Flask, featuring ETL Pipelines with Gemeni API, automated note generation & taking , and voice interaction using NLP.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Data pipelines</span>
+                            <span class="tech-tag">Gemeni API</span>
+                            <span class="tech-tag">NLP</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="btn" target="_blank"><span>View Code →</span></a>
+                        </div>
                     </div>
-                    <p>Production ETL pipeline that converts lecture audio into summarized, multi-language notes. Built using Flask, Pandas for data processing, and Google’s Gemini API for intelligent summarization.</p>
-                    <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="btn" target="_blank"><span>View Project</span></a>
-                </div>
-
-
-                <div class="project-card">
-                    <h3>AstroHub</h3>
-                    <div>
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">SQLAlchemy</span>
-                        <span class="project-tag">SQL Lite</span>
-                    </div>
-                    <p>Full-stack portfolio platform inspired by GitHub, enabling users to securely register and authenticate using JWT-based authentication. The platform allows users to create, manage, and showcase projects, with full CRUD functionality and structured data handling. Implemented role-based user management and persistent storage using Flask, SQLAlchemy ORM, and an SQLite database, following clean RESTful design principles.</p>
-                    <a href="https://github.com/ck-ahmad/AstroHub" class="btn" target="_blank"><span>View Project</span></a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Skills -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title python-gradient">Tech Stack</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Languages & Databases</h3>
-                    <div>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">JS</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">SQL</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Web Frameworks</h3>
-                    <div>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Node.js & Express.js</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">HTML & CSS & JS</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Data Science & Engineering</h3>
-                    <div>
-                        <span class="skill-tag">Numpy & Pandas</span>
-                        <span class="skill-tag">Matplotlib & Seaborn</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">Pyspark</span>
-                        <span class="skill-tag">Data Piplines</span>
-                        <span class="skill-tag">ETL/ELT/Airflow</span>
-                    </div>
-                </div>
-
-
-
-                <div class="skill-category">
-                    <h3>DevOps & Tools</h3>
-                    <div>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">VS code</span>
-                        <span class="skill-tag">Postman</span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-
-    <div class="social-links">
-         <a href="https://github.com/ck-ahmad" class="btn" target="_blank"><span>GitHub</span></a>
-         <a href="https://linkedin.com/in/ahmad0763" class="btn" target="_blank"><span>LinkedIn</span></a>
-         <a href="mailto:ahmadleo498@gmail.com" class="email-btn"><span>Email</span></a>
     </div>
-    <footer>
-        © 2026 Ahmad. | Built with Python 🐍
-    </footer>
+</section>
 
-    <script>
-        // Three.js Python-themed particle system
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+<!-- Skills -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title gradient-text"><span class="comment">// </span>Tech Stack</h2>
+        </div>
         
+        <div class="skills-section">
+            <div class="skill-category-card">
+                <h3 class="skill-category-title">Languages & Databases</h3>
+                <div class="skills-list">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">C++</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">SQL</div>
+                    <div class="skill-item">PostgreSQL</div>
+                    <div class="skill-item">MongoDB</div>
+                </div>
+            </div>
+
+            <div class="skill-category-card">
+                <h3 class="skill-category-title">Backend & APIs</h3>
+                <div class="skills-list">
+                    <div class="skill-item">Flask</div>
+                    <div class="skill-item">REST APIs</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">Express.js</div>
+                    <div class="skill-item">SQLAlchemy</div>
+                    <div class="skill-item">JWT Auth</div>
+                </div>
+            </div>
+
+            <div class="skill-category-card">
+                <h3 class="skill-category-title">Data & ML Engineering</h3>
+                <div class="skills-list">
+                    <div class="skill-item">NumPy & Pandas</div>
+                    <div class="skill-item">Scikit-learn</div>
+                    <div class="skill-item">PySpark</div>
+                    <div class="skill-item">Apache Airflow(Studing)</div>
+                    <div class="skill-item">ETL/ELT</div>
+                    <div class="skill-item">Matplotlib & Seaborn</div>
+                </div>
+            </div>
+
+            <div class="skill-category-card">
+                <h3 class="skill-category-title">DevOps & Tools</h3>
+                <div class="skills-list">
+                    <div class="skill-item">Docker</div>
+                    <div class="skill-item">Git</div>
+                    <div class="skill-item">Linux</div>
+                    <div class="skill-item">VS Code</div>
+                    <div class="skill-item">Postman</div>
+                    <div class="skill-item">pytest</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title gradient-text"><span class="comment">// </span>Get In Touch</h2>
+        </div>
+        
+        <p class="contact-cta">
+            Looking for a software engineer who ships quality code? Let's build something amazing.
+        </p>
+        <div class="social-links">
+            <a href="https://github.com/ck-ahmad" class="btn" target="_blank"><span>GitHub</span></a>
+            <a href="https://linkedin.com/in/ahmad0763" class="btn" target="_blank"><span>LinkedIn</span></a>
+            <a href="mailto:ahmadleo498@gmail.com" class="btn" target="_blank"><span>Email</span></a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        © 2026 Ahmad Abdullah | Crafted with Python & Three.js 🚀
+        Contact : ahmadleo498@gmail.com
+    </div>
+</footer>
+
+<script>
+    // Three.js Blue Galaxy particle system
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('scene-container').appendChild(renderer.domElement);
+
+    // Create multi-layered particle system
+    const blueParticles = new THREE.BufferGeometry();
+    const cyanParticles = new THREE.BufferGeometry();
+    const purpleParticles = new THREE.BufferGeometry();
+    const particlesCount = 2500;
+    
+    const bluePosArray = new Float32Array(particlesCount * 3);
+    const cyanPosArray = new Float32Array(particlesCount * 3);
+    const purplePosArray = new Float32Array(particlesCount * 3);
+
+    for(let i = 0; i < particlesCount * 3; i++) {
+        bluePosArray[i] = (Math.random() - 0.5) * 180;
+        cyanPosArray[i] = (Math.random() - 0.5) * 180;
+        purplePosArray[i] = (Math.random() - 0.5) * 180;
+    }
+
+    blueParticles.setAttribute('position', new THREE.BufferAttribute(bluePosArray, 3));
+    cyanParticles.setAttribute('position', new THREE.BufferAttribute(cyanPosArray, 3));
+    purpleParticles.setAttribute('position', new THREE.BufferAttribute(purplePosArray, 3));
+
+    const blueMaterial = new THREE.PointsMaterial({
+        size: 0.15,
+        color: 0x3b82f6,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending
+    });
+
+    const cyanMaterial = new THREE.PointsMaterial({
+        size: 0.1,
+        color: 0x06b6d4,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending
+    });
+
+    const purpleMaterial = new THREE.PointsMaterial({
+        size: 0.08,
+        color: 0x8b5cf6,
+        transparent: true,
+        opacity: 0.5,
+        blending: THREE.AdditiveBlending
+    });
+
+    const blueMesh = new THREE.Points(blueParticles, blueMaterial);
+    const cyanMesh = new THREE.Points(cyanParticles, cyanMaterial);
+    const purpleMesh = new THREE.Points(purpleParticles, purpleMaterial);
+    
+    scene.add(blueMesh);
+    scene.add(cyanMesh);
+    scene.add(purpleMesh);
+
+    camera.position.z = 50;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        blueMesh.rotation.x += 0.0004;
+        blueMesh.rotation.y += 0.0006;
+        
+        cyanMesh.rotation.x -= 0.0003;
+        cyanMesh.rotation.y -= 0.0005;
+
+        purpleMesh.rotation.x += 0.0002;
+        purpleMesh.rotation.y += 0.0003;
+
+        targetX += (mouseX * 15 - targetX) * 0.02;
+        targetY += (-mouseY * 15 - targetY) * 0.02;
+
+        camera.position.x = targetX;
+        camera.position.y = targetY;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('scene-container').appendChild(renderer.domElement);
+    });
 
-        // Create dual-colored particles (Python blue and yellow)
-        const blueParticles = new THREE.BufferGeometry();
-        const yellowParticles = new THREE.BufferGeometry();
-        const particlesCount = 1500;
-        
-        const bluePosArray = new Float32Array(particlesCount * 3);
-        const yellowPosArray = new Float32Array(particlesCount * 3);
+    // Scroll animations with Intersection Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
 
-        for(let i = 0; i < particlesCount * 3; i++) {
-            bluePosArray[i] = (Math.random() - 0.5) * 120;
-            yellowPosArray[i] = (Math.random() - 0.5) * 120;
-        }
-
-        blueParticles.setAttribute('position', new THREE.BufferAttribute(bluePosArray, 3));
-        yellowParticles.setAttribute('position', new THREE.BufferAttribute(yellowPosArray, 3));
-
-        const blueMaterial = new THREE.PointsMaterial({
-            size: 0.1,
-            color: 0x4B8BBE,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
         });
+    }, observerOptions);
 
-        const yellowMaterial = new THREE.PointsMaterial({
-            size: 0.08,
-            color: 0xFFD43B,
-            transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending
-        });
-
-        const blueMesh = new THREE.Points(blueParticles, blueMaterial);
-        const yellowMesh = new THREE.Points(yellowParticles, yellowMaterial);
-        
-        scene.add(blueMesh);
-        scene.add(yellowMesh);
-
-        camera.position.z = 50;
-
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            blueMesh.rotation.x += 0.0002;
-            blueMesh.rotation.y += 0.0003;
-            
-            yellowMesh.rotation.x -= 0.0001;
-            yellowMesh.rotation.y -= 0.0002;
-
-            targetX += (mouseX * 10 - targetX) * 0.02;
-            targetY += (-mouseY * 10 - targetY) * 0.02;
-
-            camera.position.x = targetX;
-            camera.position.y = targetY;
-            camera.lookAt(scene.position);
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Form handler
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const status = document.getElementById('form-status');
-            status.textContent = '✓ Message sent successfully!';
-            this.reset();
-            setTimeout(() => status.textContent = '', 4000);
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.glass-card, .experience-card, .project-card, .skill-category').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
+    document.querySelectorAll('.terminal-card, .stat-card, .experience-item, .project-card, .skill-category-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+        observer.observe(el);
+    });
+</script>
