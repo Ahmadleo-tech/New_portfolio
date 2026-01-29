@@ -3,1014 +3,1494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad. - Software Engineer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>AHMAD - THE DARK KNIGHT OF CODE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Bebas+Neue&family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            background: #000000;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
+        :root {
+            --bat-yellow: #FFD700;
+            --bat-gold: #FDB813;
+            --gotham-black: #000000;
+            --gotham-void: #0a0a0a;
+            --gotham-shadow: #1a1a1a;
+            --bat-glow: rgba(253, 184, 19, 0.6);
+            --danger-red: #8B0000;
         }
 
-        #scene-container {
+        body {
+            background: var(--gotham-black);
+            color: #e0e0e0;
+            font-family: 'Teko', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Gotham Cityscape Background */
+        .gotham-city {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 100vh;
             z-index: -1;
+            overflow: hidden;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% auto;
-            animation: shimmer 3s linear infinite;
+        .building {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(to top, #0a0a0a, #1a1a1a);
+            border-top: 2px solid #2a2a2a;
+            animation: buildingFlicker 4s ease-in-out infinite;
         }
 
-        @keyframes shimmer {
-            to { background-position: 200% center; }
+        @keyframes buildingFlicker {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.95; }
+        }
+
+        .building::before {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(253, 184, 19, 0.02), transparent);
+            animation: windowLight 3s ease-in-out infinite;
+        }
+
+        @keyframes windowLight {
+            0%, 100% { left: 0; opacity: 0.5; }
+            50% { left: 70%; opacity: 1; }
+        }
+
+        .building:nth-child(1) { left: 0; width: 12%; height: 250px; }
+        .building:nth-child(2) { left: 13%; width: 15%; height: 350px; animation-delay: 0.5s; }
+        .building:nth-child(3) { left: 29%; width: 10%; height: 200px; animation-delay: 1s; }
+        .building:nth-child(4) { left: 40%; width: 18%; height: 400px; animation-delay: 1.5s; }
+        .building:nth-child(5) { left: 59%; width: 12%; height: 280px; animation-delay: 2s; }
+        .building:nth-child(6) { left: 72%; width: 14%; height: 320px; animation-delay: 2.5s; }
+        .building:nth-child(7) { left: 87%; width: 13%; height: 260px; animation-delay: 3s; }
+
+        /* Massive Bat Signal */
+        .bat-signal-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .signal-beam {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(253, 184, 19, 0.3) 0%, transparent 70%);
+            animation: signalPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes signalPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
+        }
+
+        .bat-signal-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            filter: drop-shadow(0 0 40px var(--bat-glow));
+            animation: batRotate 20s linear infinite;
+        }
+
+        @keyframes batRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Storm clouds */
+        .storm-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(40, 40, 40, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 40%, rgba(30, 30, 30, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(20, 20, 20, 0.3) 0%, transparent 50%);
+            z-index: -1;
+            animation: stormMove 30s ease-in-out infinite;
+        }
+
+        @keyframes stormMove {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Lightning flash */
+        .lightning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(253, 184, 19, 0.1);
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+            animation: lightningFlash 15s ease-in-out infinite;
+        }
+
+        @keyframes lightningFlash {
+            0%, 100% { opacity: 0; }
+            48% { opacity: 0; }
+            49% { opacity: 0.8; }
+            49.5% { opacity: 0; }
+            50% { opacity: 1; }
+            50.5% { opacity: 0; }
+            51% { opacity: 0.6; }
+            51.5% { opacity: 0; }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
+        /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             position: relative;
+            text-align: center;
+            padding: 4rem 0;
         }
 
         .hero-content {
-            z-index: 1;
+            position: relative;
         }
 
-        .hero-name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 700;
-            letter-spacing: -2px;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+        /* Giant Bat Logo */
+        .hero-bat-logo {
+            width: 400px;
+            height: 200px;
+            margin: 0 auto 3rem;
+            position: relative;
+            animation: batEntrance 2s ease-out forwards;
+            opacity: 0;
         }
 
-        .hero-name::before {
-            content: 'const ';
-            color: #8b5cf6;
-            font-size: 0.35em;
-            opacity: 0.8;
+        @keyframes batEntrance {
+            0% { opacity: 0; transform: scale(0.3) translateY(-100px); }
+            60% { opacity: 1; transform: scale(1.1) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .hero-name::after {
-            content: ' = new Engineer();';
-            color: #06b6d4;
-            font-size: 0.35em;
-            opacity: 0.8;
+        .hero-bat-logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 60px var(--bat-glow));
+        }
+
+        .hero-title-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            color: var(--bat-gold);
+            text-transform: uppercase;
+            letter-spacing: 20px;
+            text-shadow: 
+                0 0 30px var(--bat-glow),
+                0 0 60px var(--bat-glow),
+                0 0 90px rgba(253, 184, 19, 0.4),
+                5px 5px 10px rgba(0, 0, 0, 0.9);
+            animation: titleDramatic 1.5s ease-out forwards;
+            opacity: 0;
+            position: relative;
+        }
+
+        @keyframes titleDramatic {
+            0% { opacity: 0; transform: scale(0.5); letter-spacing: 40px; }
+            100% { opacity: 1; transform: scale(1); letter-spacing: 20px; }
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-            animation: fadeInUp 1s ease 0.2s both;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #999;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            animation: fadeInUp 2s ease-out 0.5s forwards;
+            opacity: 0;
         }
 
-        .tech-stack-badges {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.4s both;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .tech-badge {
-            padding: 0.5rem 1.2rem;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.4);
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: #60a5fa;
-            transition: all 0.3s ease;
+        .hero-quote {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: var(--bat-gold);
+            font-style: italic;
+            margin: 2rem auto;
+            max-width: 900px;
+            padding: 1rem 2rem;
+            border-left: 4px solid var(--bat-gold);
+            border-right: 4px solid var(--bat-gold);
+            background: rgba(253, 184, 19, 0.05);
+            animation: fadeInUp 2s ease-out 1s forwards;
+            opacity: 0;
         }
 
-        .tech-badge:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-            transform: translateY(-3px);
+        /* Bat-shaped dividers */
+        .bat-divider {
+            width: 150px;
+            height: 60px;
+            margin: 3rem auto;
+            opacity: 0.6;
         }
 
-        .typing-cursor {
-            animation: blink 1s infinite;
-            color: #3b82f6;
+        .bat-divider svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--bat-gold);
+            filter: drop-shadow(0 0 20px var(--bat-glow));
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        /* Warning tape effect */
+        .warning-tape {
+            background: repeating-linear-gradient(
+                45deg,
+                var(--gotham-black),
+                var(--gotham-black) 20px,
+                var(--bat-gold) 20px,
+                var(--bat-gold) 40px
+            );
+            height: 8px;
+            margin: 4rem 0;
+            opacity: 0.3;
+            position: relative;
         }
 
+        .warning-tape::after {
+            content: '⚠ CLASSIFIED INTEL ⚠ AUTHORIZED PERSONNEL ONLY ⚠ CLASSIFIED INTEL ⚠';
+            position: absolute;
+            top: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--bat-gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+        }
+
+        /* Section headers */
         .section {
-            padding: 8rem 0;
+            padding: 6rem 0;
             position: relative;
         }
 
         .section-header {
-            margin-bottom: 4rem;
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            filter: drop-shadow(0 0 30px var(--bat-glow));
+        }
+
+        .section-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--bat-gold);
         }
 
         .section-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--bat-gold);
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 30px var(--bat-glow),
+                0 0 60px rgba(253, 184, 19, 0.4);
+            position: relative;
         }
 
-        .section-title .comment {
-            color: #6b7280;
+        .section-title::before,
+        .section-title::after {
+            content: '◆';
+            color: var(--bat-gold);
+            margin: 0 2rem;
             font-size: 0.5em;
-            font-weight: 400;
+            opacity: 0.6;
         }
 
-        .terminal-card {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
+        /* Bat-tech cards */
+        .bat-card {
+            background: 
+                linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+            border: 3px solid var(--gotham-shadow);
+            box-shadow: 
+                0 0 0 1px var(--bat-gold),
+                0 20px 60px rgba(0, 0, 0, 0.9),
+                inset 0 0 80px rgba(0, 0, 0, 0.5);
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.5s ease;
+            clip-path: polygon(
+                0 0, 
+                calc(100% - 30px) 0, 
+                100% 30px, 
+                100% 100%, 
+                30px 100%, 
+                0 calc(100% - 30px)
+            );
         }
 
-        .terminal-header {
-            background: rgba(59, 130, 246, 0.1);
-            padding: 0.75rem 1.5rem;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .bat-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--bat-gold), transparent, var(--bat-gold));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
         }
 
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .bat-card:hover {
+            border-color: var(--bat-gold);
+            box-shadow: 
+                0 0 0 2px var(--bat-gold),
+                0 0 40px var(--bat-glow),
+                0 30px 80px rgba(0, 0, 0, 0.9),
+                inset 0 0 80px rgba(0, 0, 0, 0.5);
+            transform: translateY(-10px);
         }
 
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #eab308; }
-        .dot-green { background: #22c55e; }
-
-        .terminal-content {
-            padding: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            line-height: 1.8;
+        .bat-card:hover::before {
+            opacity: 0.1;
         }
 
-        .terminal-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
-        }
-
-        .code-line {
-            margin-bottom: 0.5rem;
-        }
-
-        .keyword { color: #8b5cf6; }
-        .string { color: #06b6d4; }
-        .number { color: #3b82f6; }
-        .comment { color: #6b7280; }
-        .function { color: #60a5fa; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        /* Bat-computer terminal */
+        .bat-computer {
+            background: #000000;
+            border: 4px solid var(--bat-gold);
+            box-shadow: 
+                0 0 40px var(--bat-glow),
+                inset 0 0 60px rgba(253, 184, 19, 0.1);
+            padding: 0;
             margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
             position: relative;
             overflow: hidden;
         }
 
-        .stat-card::before {
+        .bat-computer-header {
+            background: linear-gradient(135deg, var(--bat-gold) 0%, #DAA520 100%);
+            color: var(--gotham-black);
+            padding: 1rem 2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--bat-gold);
+        }
+
+        .bat-computer-status {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--danger-red);
+            box-shadow: 0 0 10px var(--danger-red);
+            animation: statusBlink 2s ease-in-out infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .status-indicator.active {
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .bat-computer-body {
+            padding: 2rem;
+            color: var(--bat-gold);
+            line-height: 2;
+            font-size: 1.1rem;
+        }
+
+        .code-line {
+            margin: 0.5rem 0;
+            text-shadow: 0 0 5px var(--bat-glow);
+        }
+
+        .code-keyword { color: #FFD700; font-weight: bold; }
+        .code-class { color: #FDB813; }
+        .code-string { color: #DAA520; }
+        .code-comment { 
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Stats - Bat-tech style */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-module {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 3px solid var(--bat-gold);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.4s ease;
+        }
+
+        .stat-module::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #06b6d4);
-            opacity: 0;
-            transition: opacity 0.3s;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(253, 184, 19, 0.05) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
         }
 
-        .stat-card:hover::before {
-            opacity: 1;
+        .stat-module:hover::before {
+            transform: translateX(100%);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        .stat-module:hover {
+            border-color: var(--bat-gold);
+            box-shadow: 
+                0 0 50px var(--bat-glow),
+                inset 0 0 40px rgba(253, 184, 19, 0.1);
+            transform: translateY(-15px) scale(1.05);
         }
 
-        .stat-value {
-            font-family: 'JetBrains Mono', monospace;
+        .stat-icon {
             font-size: 3rem;
-            font-weight: 700;
-            color: #3b82f6;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 20px var(--bat-glow));
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            color: var(--bat-gold);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 30px var(--bat-glow),
+                0 0 60px rgba(253, 184, 19, 0.4);
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
-        .experience-timeline {
+        /* Timeline - Wayne Enterprises style */
+        .timeline {
             position: relative;
-            padding-left: 3rem;
+            padding: 3rem 0;
         }
 
-        .experience-timeline::before {
+        .timeline::before {
             content: '';
             position: absolute;
-            left: 0;
+            left: 50%;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #3b82f6, #06b6d4, #8b5cf6);
+            width: 4px;
+            background: linear-gradient(
+                to bottom,
+                var(--bat-gold),
+                var(--gotham-shadow),
+                var(--bat-gold)
+            );
+            box-shadow: 0 0 20px var(--bat-glow);
+            transform: translateX(-50%);
         }
 
-        .experience-item {
+        .timeline-item {
             position: relative;
-            margin-bottom: 3rem;
-            padding-left: 2rem;
+            margin-bottom: 6rem;
+            width: calc(50% - 60px);
         }
 
-        .experience-item::before {
-            content: '';
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+            padding-right: 80px;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: calc(50% + 60px);
+            padding-left: 80px;
+        }
+
+        .timeline-marker {
             position: absolute;
-            left: -3.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            background: #3b82f6;
-            border: 3px solid #000;
+            top: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gotham-black);
+            border: 4px solid var(--bat-gold);
             border-radius: 50%;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+            box-shadow: 
+                0 0 30px var(--bat-glow),
+                inset 0 0 20px rgba(253, 184, 19, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
         }
 
-        .experience-item:hover::before {
-            background: #06b6d4;
-            box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.3);
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -110px;
         }
 
-        .experience-header {
-            margin-bottom: 1rem;
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -110px;
         }
 
-        .experience-role {
-            font-family: 'JetBrains Mono', monospace;
+        .timeline-marker svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--bat-gold);
+            filter: drop-shadow(0 0 10px var(--bat-glow));
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            border: 2px solid var(--gotham-shadow);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+
+        .timeline-content:hover {
+            border-color: var(--bat-gold);
+            box-shadow: 0 0 40px var(--bat-glow);
+            transform: scale(1.02);
+        }
+
+        .timeline-role {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: var(--bat-gold);
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px var(--bat-glow);
+        }
+
+        .timeline-company {
             font-size: 1.5rem;
+            color: #DAA520;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #3b82f6;
-            margin-bottom: 0.25rem;
         }
 
-        .experience-company {
-            color: #06b6d4;
+        .timeline-date {
+            font-family: 'Bebas Neue', sans-serif;
             font-size: 1.1rem;
-            font-weight: 500;
+            color: #666;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .experience-meta {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 1rem;
-        }
-
-        .experience-description {
-            color: rgba(255, 255, 255, 0.8);
+        .timeline-desc {
+            color: #b0b0b0;
             line-height: 1.8;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
 
-        .experience-highlights {
+        .timeline-points {
             list-style: none;
             padding: 0;
         }
 
-        .experience-highlights li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: rgba(255, 255, 255, 0.7);
+        .timeline-points li {
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            color: #999;
             position: relative;
+            font-size: 1.05rem;
         }
 
-        .experience-highlights li::before {
-            content: "→";
+        .timeline-points li::before {
+            content: '⬣';
             position: absolute;
             left: 0;
-            color: #3b82f6;
-            font-weight: bold;
+            color: var(--bat-gold);
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--bat-glow);
         }
 
+        /* Projects - Bat-gadgets */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
         }
 
-        .project-card {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
+        .project-module {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border: 3px solid var(--bat-gold);
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
+            transition: all 0.5s ease;
+            clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
         }
 
-        .project-card::before {
+        .project-module::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #06b6d4, #8b5cf6);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(253, 184, 19, 0.1) 0%, transparent 70%);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
-        .project-card:hover::before {
+        .project-module:hover {
+            transform: translateY(-15px);
+            box-shadow: 
+                0 0 60px var(--bat-glow),
+                0 30px 80px rgba(0, 0, 0, 0.9);
+        }
+
+        .project-module:hover::after {
             opacity: 1;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        .project-header {
+            background: linear-gradient(135deg, var(--bat-gold) 0%, #DAA520 100%);
+            padding: 2rem;
+            border-bottom: 3px solid var(--bat-gold);
+            position: relative;
         }
 
-        .project-content {
-            padding: 2rem;
+        .project-header::before {
+            content: '◆';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 3rem;
+            color: rgba(0, 0, 0, 0.2);
         }
 
         .project-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #3b82f6;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--gotham-black);
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .project-description {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+        .project-body {
+            padding: 2.5rem;
         }
 
-        .project-tech {
+        .project-desc {
+            color: #b0b0b0;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .tech-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            padding: 0.4rem 0.9rem;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: 'JetBrains Mono', monospace;
-            color: #60a5fa;
-            transition: all 0.3s ease;
-        }
-
-        .tech-tag:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
-        }
-
-        .project-links {
-            display: flex;
             gap: 1rem;
+            margin: 2rem 0;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
+        .tech-badge {
+            padding: 0.7rem 1.5rem;
+            background: var(--gotham-black);
+            border: 2px solid var(--bat-gold);
+            color: var(--bat-gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-family: 'JetBrains Mono', monospace;
+            text-shadow: 0 0 10px var(--bat-glow);
+        }
+
+        .tech-badge:hover {
+            background: var(--bat-gold);
+            color: var(--gotham-black);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--bat-glow);
+        }
+
+        /* Buttons - Bat-style */
+        .bat-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--gotham-shadow) 0%, var(--gotham-black) 100%);
+            border: 3px solid var(--bat-gold);
+            color: var(--bat-gold);
+            text-decoration: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            margin: 0.5rem;
+            text-shadow: 0 0 10px var(--bat-glow);
         }
 
-        .btn::before {
+        .bat-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-            transition: left 0.3s;
+            background: var(--bat-gold);
+            transition: left 0.4s ease;
+            z-index: -1;
         }
 
-        .btn:hover::before {
+        .bat-button:hover {
+            color: var(--gotham-black);
+            box-shadow: 
+                0 0 40px var(--bat-glow),
+                0 10px 30px rgba(0, 0, 0, 0.8);
+            transform: translateY(-5px);
+        }
+
+        .bat-button:hover::before {
             left: 0;
         }
 
-        .btn span {
+        /* Contact - Bat-signal style */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .contact-module {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 2px solid var(--gotham-shadow);
+            padding: 3rem 2rem;
+            text-align: center;
             position: relative;
-            z-index: 1;
+            transition: all 0.4s ease;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.5);
+        .contact-module::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(253, 184, 19, 0.15) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+            border-radius: 50%;
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid rgba(59, 130, 246, 0.5);
+        .contact-module:hover::before {
+            width: 500px;
+            height: 500px;
         }
 
-        .btn-secondary::before {
-            background: rgba(59, 130, 246, 0.1);
+        .contact-module:hover {
+            border-color: var(--bat-gold);
+            box-shadow: 0 0 50px var(--bat-glow);
+            transform: translateY(-10px);
         }
 
-        .skills-section {
-            display: grid;
-            gap: 3rem;
-        }
-
-        .skill-category-card {
-            background: rgba(10, 10, 10, 0.8);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-category-card:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-        }
-
-        .skill-category-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            color: #3b82f6;
+        .contact-icon {
+            font-size: 4rem;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            filter: drop-shadow(0 0 30px var(--bat-glow));
         }
 
-        .skill-category-title::before {
-            content: '//';
-            color: #6b7280;
+        .contact-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--bat-gold);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px var(--bat-glow);
         }
 
-        .skills-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 1rem;
+        .contact-value {
+            color: #999;
+            font-size: 1.1rem;
         }
 
-        .skill-item {
-            padding: 0.75rem 1rem;
-            background: rgba(59, 130, 246, 0.05);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: #60a5fa;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .skill-item:hover {
-            background: rgba(59, 130, 246, 0.15);
-            border-color: #3b82f6;
-            transform: translateY(-3px);
-        }
-
-        .contact-section {
-            text-align: center;
-        }
-
-        .contact-cta {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .contact-email {
-            font-size: 1.5rem;
-            color: #3b82f6;
-            margin: 2rem 0;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 3rem;
-        }
-
+        /* Footer */
         footer {
             text-align: center;
-            padding: 4rem 0 2rem;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            font-family: 'JetBrains Mono', monospace;
-            border-top: 1px solid rgba(59, 130, 246, 0.1);
+            padding: 6rem 0 3rem;
+            border-top: 3px solid var(--bat-gold);
+            margin-top: 8rem;
+            background: linear-gradient(to bottom, transparent, var(--gotham-black));
+            position: relative;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        .footer-bat {
+            width: 120px;
+            height: 60px;
+            margin: 0 auto 2rem;
+            filter: drop-shadow(0 0 30px var(--bat-glow));
+        }
+
+        .footer-bat svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--bat-gold);
+        }
+
+        .footer-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--bat-gold);
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px var(--bat-glow);
+        }
+
+        .footer-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #666;
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        .footer-copyright {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #444;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .timeline::before {
+                left: 30px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding-left: 100px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-marker,
+            .timeline-item:nth-child(odd) .timeline-marker,
+            .timeline-item:nth-child(even) .timeline-marker {
+                left: 0;
+                right: auto;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .hero-name::after {
-                display: block;
-                margin-top: 1rem;
+            .hero-bat-logo {
+                width: 250px;
+                height: 125px;
             }
 
-            .section {
-                padding: 4rem 0;
+            .hero-title {
+                font-size: 3.5rem;
+                letter-spacing: 8px;
             }
 
-            .experience-timeline {
-                padding-left: 2rem;
-            }
-
-            .projects-grid,
-            .skills-list {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 2.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div id="scene-container"></div>
+    <div class="lightning"></div>
+    <div class="storm-layer"></div>
+    
+    <!-- Gotham Cityscape -->
+    <div class="gotham-city">
+        <div class="building"></div>
+        <div class="building"></div>
+        <div class="building"></div>
+        <div class="building"></div>
+        <div class="building"></div>
+        <div class="building"></div>
+        <div class="building"></div>
+    </div>
 
-    <!-- Hero -->
+    <!-- Bat Signal -->
+    <div class="bat-signal-container">
+        <div class="signal-beam"></div>
+        <div class="bat-signal-symbol">
+            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <path d="M150,80 L180,95 L210,85 L235,110 L255,100 L275,130 L285,120 L295,150 L295,170 L285,180 L275,195 L255,185 L235,210 L210,200 L180,220 L150,200 L120,220 L90,200 L65,210 L45,185 L25,195 L15,180 L5,170 L5,150 L15,120 L25,130 L45,100 L65,110 L90,85 L120,95 Z M150,110 Q170,120 180,140 Q185,160 180,180 Q170,195 150,195 Q130,195 120,180 Q115,160 120,140 Q130,120 150,110 Z" 
+                      fill="#FDB813" opacity="0.9"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-name gradient-text">Ahmad</h1>
-            <p class="hero-subtitle">Software Engineer | Building scalable systems & ML pipelines<span class="typing-cursor">_</span></p>
-            <div class="tech-stack-badges">
-                <span class="tech-badge">Python</span>
-                <span class="tech-badge">Flask</span>
-                <span class="tech-badge">Machine Learning</span>
-                <span class="tech-badge">Backend Dev</span>
-                <span class="tech-badge">Data Engineering</span>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-bat-logo">
+                    <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M200,40 L240,60 L280,50 L310,80 L330,70 L350,100 L360,90 L370,120 L370,140 L360,150 L350,165 L330,155 L310,185 L280,175 L240,200 L200,180 L160,200 L120,175 L90,185 L70,155 L50,165 L40,150 L30,140 L30,120 L40,90 L50,100 L70,70 L90,80 L120,50 L160,60 Z M200,80 Q220,90 230,110 Q235,130 230,150 Q220,165 200,165 Q180,165 170,150 Q165,130 170,110 Q180,90 200,80 Z" 
+                              fill="#FDB813"/>
+                    </svg>
+                </div>
+
+                <div class="hero-title-wrapper">
+                    <h1 class="hero-title">AHMAD</h1>
+                </div>
+
+                <p class="hero-subtitle">The Dark Knight of Code</p>
+
+                <div class="hero-quote">
+                    "It's not who I am underneath, but what I code that defines me."
+                </div>
+
+                <div class="tech-badges">
+                    <span class="tech-badge">PYTHON MASTER</span>
+                    <span class="tech-badge">BACKEND ARCHITECT</span>
+                    <span class="tech-badge">ML ENGINEER</span>
+                    <span class="tech-badge">API GUARDIAN</span>
+                    <span class="tech-badge">DATA PROTECTOR</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
+    <div class="warning-tape"></div>
+
+    <!-- About Section -->
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title gradient-text"><span class="comment">// </span>About</h2>
-            </div>
-            
-            <div class="terminal-card">
-                <div class="terminal-header">
-                    <div class="terminal-dot dot-red"></div>
-                    <div class="terminal-dot dot-yellow"></div>
-                    <div class="terminal-dot dot-green"></div>
-                    <span style="color: rgba(255,255,255,0.5); margin-left: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">~ /about</span>
+                <div class="section-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50,20 L60,25 L70,23 L78,33 L83,30 L88,40 L90,38 L93,48 L93,55 L90,58 L88,63 L83,60 L78,70 L70,67 L60,75 L50,68 L40,75 L30,67 L22,70 L17,60 L12,63 L10,58 L7,55 L7,48 L10,38 L12,40 L17,30 L22,33 L30,23 L40,25 Z M50,35 Q55,38 58,43 Q60,50 58,57 Q55,62 50,62 Q45,62 42,57 Q40,50 42,43 Q45,38 50,35 Z" 
+                              fill="#FDB813"/>
+                    </svg>
                 </div>
-                <div class="terminal-content">
-                    <div class="code-line"><span class="keyword">class</span> <span class="function">SoftwareEngineer</span>:</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">__init__</span>(self):</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = <span class="string">"Ahmad Abdullah"</span></div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.role = <span class="string">"Software Engineer"</span></div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.education = <span class="string">"CS @ FAST NUCES"</span></div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.current = <span class="string">"SDE @ Dev Weekends"</span></div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.experience = <span class="string">"6 Month +"</span></div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.location = <span class="string">"Pakistan"</span></div>
-                    <br>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function">get_expertise</span>(self):</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> [</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Backend Development (Flask, Node.js)"</span>,</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ML / Data Engineering"</span>,</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Data Pipeline Architecture (ETL/ELT)"</span>,</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"REST API Design & Development"</span>,</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Python Developer"</span>,</div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Database Engineering (PostgreSQL, MongoDB)"</span></div>
-                    <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</div>
-                    <br>
-                    <div class="code-line"><span class="comment"># 5+ internships | 25+ projects | 2 hackathon wins | 6 Month + Experience</span></div>
-                    <div class="code-line"><span class="comment"># Built systems processing millions of data points daily</span></div>
+                <h2 class="section-title">ORIGIN STORY</h2>
+            </div>
+
+            <div class="bat-computer">
+                <div class="bat-computer-header">
+                    <span>◆ BATCOMPUTER CLASSIFIED DATABASE ◆</span>
+                    <div class="bat-computer-status">
+                        <span class="status-indicator active"></span>
+                        <span class="status-indicator active"></span>
+                        <span class="status-indicator"></span>
+                        <span style="font-size: 1rem;">SYSTEM ACTIVE</span>
+                    </div>
+                </div>
+                <div class="bat-computer-body">
+                    <div class="code-line"><span class="code-keyword">class</span> <span class="code-class">DarkKnight</span>:</div>
+                    <div class="code-line">    <span class="code-keyword">def</span> __init__(self):</div>
+                    <div class="code-line">        self.identity = <span class="code-string">"Ahmad Abdullah"</span></div>
+                    <div class="code-line">        self.alias = <span class="code-string">"The Dark Developer"</span></div>
+                    <div class="code-line">        self.mission = <span class="code-string">"Protect systems. Eliminate bugs. Bring order to chaos."</span></div>
+                    <div class="code-line">        self.training = <span class="code-string">"Computer Science @ FAST NUCES"</span></div>
+                    <div class="code-line">        self.current_operation = <span class="code-string">"Software Engineer @ Dev Weekends"</span></div>
+                    <div class="code-line">        self.years_active = <span class="code-string">"6+ Months of Night Patrols"</span></div>
+                    <div class="code-line">        self.base_of_operations = <span class="code-string">"Pakistan - The Eastern Watchtower"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="code-keyword">def</span> get_arsenal(self):</div>
+                    <div class="code-line">        <span class="code-keyword">return</span> {</div>
+                    <div class="code-line">            <span class="code-string">"primary_weapons"</span>: [<span class="code-string">"Flask/FastAPI"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Python"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"advanced_tech"</span>: [<span class="code-string">"ML/AI"</span>, <span class="code-string">"PySpark"</span>, <span class="code-string">"Data Engineering"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"defense_systems"</span>: [<span class="code-string">"PostgreSQL"</span>, <span class="code-string">"MongoDB"</span>, <span class="code-string">"Docker"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"tactical_gear"</span>: [<span class="code-string">"REST APIs"</span>, <span class="code-string">"ETL Pipelines"</span>, <span class="code-string">"JWT Auth"</span>]</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="code-comment"># "Why do we code? So we can learn to build ourselves up."</span></div>
+                    <div class="code-line"><span class="code-comment"># Systems protected: MILLIONS OF DATA POINTS DAILY</span></div>
                 </div>
             </div>
 
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">25+</div>
-                    <div class="stat-label">Production Projects</div>
+                <div class="stat-module">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Missions Completed</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">5+</div>
-                    <div class="stat-label">Industry Internships</div>
+                <div class="stat-module">
+                    <div class="stat-icon">🦇</div>
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Alliances Formed</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">2</div>
-                    <div class="stat-label">Hackathon Victories</div>
+                <div class="stat-module">
+                    <div class="stat-icon">⬣</div>
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Victories Won</div>
+                </div>
+                <div class="stat-module">
+                    <div class="stat-icon">◆</div>
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Months In Service</div>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="btn" target="_blank"><span>📄 Download Resume</span></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title gradient-text"><span class="comment">// </span>Experience</h2>
-            </div>
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-role">Full Stack Developer</h3>
-                        <div class="experience-company">GAOTEK Inc.</div>
-                    </div>
-                    <p class="experience-meta">Jan 2026 – Present • Hybrid</p>
-                    <p class="experience-description">
-                        Architecting and developing production-grade Web applications, building scalable REST APIs, and Websites.
-                    </p>
-                    <ul class="experience-highlights">
-                        <li>Designed & developing async REST APIs with Flask & Express.js serving 100K+ requests/day</li>
-                        <li>Built web apps and websites using Node.js and Flask</li>
-                        <li>Engineered database solutions (PostgreSQL, MongoDB) with SQLAlchemy/PyMongo ORM</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-role">SDE Mentee</h3>
-                        <div class="experience-company">Dev Weekends</div>
-                    </div>
-                    <p class="experience-meta">Nov 2025 – Present • Pakistan</p>
-                    <p class="experience-description">
-                        Intensive engineering program focused on advanced DSA, system design, and production-grade development practices.
-                    </p>
-                    <ul class="experience-highlights">
-                        <li>Deep-dive into Python DSA implementation & competitive programming</li>
-                        <li>System design workshops covering scalability, caching, and distributed systems</li>
-                        <li>Building production apps following SOLID principles & design patterns</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-role">ML/Data Engineer</h3>
-                        <div class="experience-company">Softsincs</div>
-                    </div>
-                    <p class="experience-meta">Aug 2025 – Sep 2025 • Lahore</p>
-                    <ul class="experience-highlights">
-                        <li>Built data pipelines with PySpark processing records daily</li>
-                        <li>Built production ML systems with scikit-learn.</li>
-                        <li>Implemented feature engineering pipelines improving model accuracy by 23%</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-role">Data Analyst</h3>
-                        <div class="experience-company">Elevvo Pathways</div>
-                    </div>
-                    <p class="experience-meta">Jul 2025 – Aug 2025 • Remote</p>
-                    <ul class="experience-highlights">
-                        <li>Automated workflows with Python reducing manual effort by 40%</li>
-                        <li>Statistical analysis with Numpy & Pandas driving data-informed decisions</li>
-                    </ul>
-                </div>
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="bat-button" target="_blank">ACCESS DOSSIER</a>
             </div>
         </div>
     </section>
 
-    <!-- Projects -->
+    <div class="bat-divider">
+        <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M75,10 L90,18 L105,15 L118,25 L125,22 L132,32 L135,30 L140,38 L140,42 L135,45 L132,50 L125,47 L118,55 L105,52 L90,58 L75,50 L60,58 L45,52 L32,55 L25,47 L18,50 L15,45 L10,42 L10,38 L15,30 L18,32 L25,22 L32,25 L45,15 L60,18 Z" 
+                  fill="#FDB813"/>
+        </svg>
+    </div>
+
+    <!-- Experience Section -->
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title gradient-text"><span class="comment">// </span>Featured Projects</h2>
+                <div class="section-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="30" y="20" width="40" height="50" fill="none" stroke="#FDB813" stroke-width="4"/>
+                        <line x1="35" y1="30" x2="65" y2="30" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="35" y1="40" x2="65" y2="40" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="35" y1="50" x2="65" y2="50" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="35" y1="60" x2="55" y2="60" stroke="#FDB813" stroke-width="3"/>
+                    </svg>
+                </div>
+                <h2 class="section-title">CHRONICLES</h2>
             </div>
-            
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
+                                  fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">FULL STACK DEVELOPER</div>
+                        <div class="timeline-company">GAOTEK Inc.</div>
+                        <div class="timeline-date">Jan 2026 – Present • Hybrid Operations</div>
+                        <div class="timeline-desc">
+                            Leading the charge in architecting production-grade web applications with scalable REST APIs.
+                        </div>
+                        <ul class="timeline-points">
+                            <li>Engineered async REST APIs handling 100K+ requests daily using Flask/FastAPI & Express.js</li>
+                            <li>Built full-stack applications with Node.js and Flask/FastAPI frameworks</li>
+                            <li>Deployed database solutions with PostgreSQL, MongoDB, SQLAlchemy, and PyMongo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
+                                  fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">SDE MENTEE</div>
+                        <div class="timeline-company">Dev Weekends</div>
+                        <div class="timeline-date">Nov 2025 – Present • Pakistan</div>
+                        <div class="timeline-desc">
+                            Intensive training program focused on advanced algorithms, system architecture, and combat-ready code.
+                        </div>
+                        <ul class="timeline-points">
+                            <li>Mastered Python DSA implementation and competitive programming techniques</li>
+                            <li>System design mastery: scalability, caching, distributed systems architecture</li>
+                            <li>Built production-grade applications following SOLID principles and design patterns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
+                                  fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">ML/DATA ENGINEER</div>
+                        <div class="timeline-company">Softsincs</div>
+                        <div class="timeline-date">Aug 2025 – Sep 2025 • Lahore</div>
+                        <ul class="timeline-points">
+                            <li>Constructed data pipelines with PySpark processing massive datasets</li>
+                            <li>Deployed production ML systems using scikit-learn for real-world applications</li>
+                            <li>Engineered feature pipelines improving model accuracy by 23%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
+                                  fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">DATA ANALYST</div>
+                        <div class="timeline-company">Elevvo Pathways</div>
+                        <div class="timeline-date">Jul 2025 – Aug 2025 • Remote</div>
+                        <ul class="timeline-points">
+                            <li>Automated workflows with Python reducing manual effort by 40%</li>
+                            <li>Conducted statistical analysis with NumPy & Pandas for data-driven decisions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="warning-tape"></div>
+
+    <!-- Projects Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="30" fill="none" stroke="#FDB813" stroke-width="4"/>
+                        <circle cx="50" cy="50" r="5" fill="#FDB813"/>
+                        <line x1="50" y1="20" x2="50" y2="35" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="50" y1="65" x2="50" y2="80" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="20" y1="50" x2="35" y2="50" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="65" y1="50" x2="80" y2="50" stroke="#FDB813" stroke-width="3"/>
+                    </svg>
+                </div>
+                <h2 class="section-title">ARSENAL</h2>
+            </div>
+
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">Student AI Assistant 2.0</h3>
-                        <p class="project-description">
-                            Production AI platform built with Flask, featuring adaptive Q&A via Gemeni API, automated study planning, and voice interaction using NLP.Got in Top 10 in VibeCode's VIDE-E-THON 2025.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">Cloudinary</span>
-                            <span class="tech-tag">Gemeni API</span>
-                            <span class="tech-tag">NLP</span>
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">STUDENT AI ASSISTANT 2.0</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-desc">
+                            Advanced AI platform engineered with Flask/FastAPI backend, featuring adaptive Q&A powered by Gemini API, 
+                            automated study planning algorithms, and NLP-driven voice interaction. Achieved Top 10 placement 
+                            in VibeCode's VIDE-E-THON 2025 competition.
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ck-ahmad/Student_AI_Assistant" class="btn" target="_blank"><span>View Code →</span></a>
+                        <div class="tech-badges">
+                            <span class="tech-badge">PYTHON</span>
+                            <span class="tech-badge">Flask/FastAPI</span>
+                            <span class="tech-badge">GEMINI API</span>
+                            <span class="tech-badge">NLP</span>
+                            <span class="tech-badge">CLOUDINARY</span>
+                        </div>
+                        <div style="margin-top: 2rem;">
+                            <a href="https://github.com/ck-ahmad/Student_AI_Assistant" class="bat-button" target="_blank">ACCESS PROJECT</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title">AI Note Generator</h3>
-                        <p class="project-description">
-                         Production AI platform built with Flask, featuring ETL Pipelines with Gemeni API, automated note generation & taking , and voice interaction using NLP.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">Data pipelines</span>
-                            <span class="tech-tag">Gemeni API</span>
-                            <span class="tech-tag">NLP</span>
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">AI NOTE GENERATOR</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-desc">
+                            Production-grade AI platform built with Flask/FastAPI, featuring sophisticated ETL pipelines integrated 
+                            with Gemini API, automated note generation and transcription capabilities, and advanced 
+                            voice interaction powered by cutting-edge NLP technology.
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="btn" target="_blank"><span>View Code →</span></a>
+                        <div class="tech-badges">
+                            <span class="tech-badge">PYTHON</span>
+                            <span class="tech-badge">Flask/FastAPI</span>
+                            <span class="tech-badge">ETL PIPELINES</span>
+                            <span class="tech-badge">GEMINI API</span>
+                            <span class="tech-badge">NLP</span>
+                        </div>
+                        <div style="margin-top: 2rem;">
+                            <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="bat-button" target="_blank">ACCESS PROJECT</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <div class="bat-divider">
+        <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M75,10 L90,18 L105,15 L118,25 L125,22 L132,32 L135,30 L140,38 L140,42 L135,45 L132,50 L125,47 L118,55 L105,52 L90,58 L75,50 L60,58 L45,52 L32,55 L25,47 L18,50 L15,45 L10,42 L10,38 L15,30 L18,32 L25,22 L32,25 L45,15 L60,18 Z" 
+                  fill="#FDB813"/>
+        </svg>
     </div>
-</section>
 
-<!-- Skills -->
-<section class="section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title gradient-text"><span class="comment">// </span>Tech Stack</h2>
-        </div>
-        
-        <div class="skills-section">
-            <div class="skill-category-card">
-                <h3 class="skill-category-title">Languages & Databases</h3>
-                <div class="skills-list">
-                    <div class="skill-item">Python</div>
-                    <div class="skill-item">C++</div>
-                    <div class="skill-item">JavaScript</div>
-                    <div class="skill-item">SQL</div>
-                    <div class="skill-item">PostgreSQL</div>
-                    <div class="skill-item">MongoDB</div>
+    <!-- Tech Stack Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="20" y="30" width="60" height="40" fill="none" stroke="#FDB813" stroke-width="4"/>
+                        <line x1="30" y1="40" x2="70" y2="40" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="30" y1="50" x2="70" y2="50" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="30" y1="60" x2="55" y2="60" stroke="#FDB813" stroke-width="3"/>
+                        <circle cx="50" cy="20" r="8" fill="none" stroke="#FDB813" stroke-width="3"/>
+                        <line x1="50" y1="28" x2="50" y2="30" stroke="#FDB813" stroke-width="3"/>
+                    </svg>
                 </div>
+                <h2 class="section-title">THE BATCAVE</h2>
             </div>
 
-            <div class="skill-category-card">
-                <h3 class="skill-category-title">Backend & APIs</h3>
-                <div class="skills-list">
-                    <div class="skill-item">Flask</div>
-                    <div class="skill-item">REST APIs</div>
-                    <div class="skill-item">Node.js</div>
-                    <div class="skill-item">Express.js</div>
-                    <div class="skill-item">SQLAlchemy</div>
-                    <div class="skill-item">JWT Auth</div>
+            <div class="bat-computer">
+                <div class="bat-computer-header">
+                    <span>◆ ADVANCED TECHNOLOGY DATABASE ◆</span>
+                    <div class="bat-computer-status">
+                        <span class="status-indicator active"></span>
+                        <span class="status-indicator active"></span>
+                        <span class="status-indicator active"></span>
+                        <span style="font-size: 1rem;">ALL SYSTEMS ONLINE</span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="skill-category-card">
-                <h3 class="skill-category-title">Data & ML Engineering</h3>
-                <div class="skills-list">
-                    <div class="skill-item">NumPy & Pandas</div>
-                    <div class="skill-item">Scikit-learn</div>
-                    <div class="skill-item">PySpark</div>
-                    <div class="skill-item">Apache Airflow(Studing)</div>
-                    <div class="skill-item">ETL/ELT</div>
-                    <div class="skill-item">Matplotlib & Seaborn</div>
-                </div>
-            </div>
-
-            <div class="skill-category-card">
-                <h3 class="skill-category-title">DevOps & Tools</h3>
-                <div class="skills-list">
-                    <div class="skill-item">Docker</div>
-                    <div class="skill-item">Git</div>
-                    <div class="skill-item">Linux</div>
-                    <div class="skill-item">VS Code</div>
-                    <div class="skill-item">Postman</div>
-                    <div class="skill-item">pytest</div>
+                <div class="bat-computer-body">
+                    <div class="code-line"><span class="code-keyword">const</span> <span class="code-class">batcave_arsenal</span> = {</div>
+                    <div class="code-line">    <span class="code-string">primary_languages</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"C++"</span>, <span class="code-string">"SQL"</span>],</div>
+                    <div class="code-line">    <span class="code-string">data_fortresses</span>: [<span class="code-string">"PostgreSQL"</span>, <span class="code-string">"MongoDB"</span>],</div>
+                    <div class="code-line">    <span class="code-string">backend_armor</span>: [<span class="code-string">"Flask/FastAPI"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Express.js"</span>, <span class="code-string">"REST APIs"</span>],</div>
+                    <div class="code-line">    <span class="code-string">ai_weapons</span>: [<span class="code-string">"scikit-learn"</span>, <span class="code-string">"PySpark"</span>, <span class="code-string">"NumPy"</span>, <span class="code-string">"Pandas"</span>],</div>
+                    <div class="code-line">    <span class="code-string">data_bridges</span>: [<span class="code-string">"SQLAlchemy"</span>, <span class="code-string">"PyMongo"</span>],</div>
+                    <div class="code-line">    <span class="code-string">security_protocols</span>: [<span class="code-string">"JWT"</span>, <span class="code-string">"OAuth"</span>],</div>
+                    <div class="code-line">    <span class="code-string">deployment_gear</span>: [<span class="code-string">"Docker"</span>, <span class="code-string">"Git"</span>, <span class="code-string">"Linux"</span>],</div>
+                    <div class="code-line">    <span class="code-string">tactical_tools</span>: [<span class="code-string">"VS Code"</span>, <span class="code-string">"Postman"</span>, <span class="code-string">"pytest"</span>],</div>
+                    <div class="code-line">    <span class="code-string">data_pipelines</span>: [<span class="code-string">"ETL/ELT"</span>, <span class="code-string">"Apache Airflow"</span>],</div>
+                    <div class="code-line">    <span class="code-string">intelligence_viz</span>: [<span class="code-string">"Matplotlib"</span>, <span class="code-string">"Seaborn"</span>]</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="code-comment">// "I have one power. I never give up."</span></div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Contact -->
-<section class="section contact-section">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title gradient-text"><span class="comment">// </span>Get In Touch</h2>
+    <div class="warning-tape"></div>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="35" r="25" fill="none" stroke="#FDB813" stroke-width="4"/>
+                        <path d="M50,35 L50,60 M40,70 L50,60 L60,70" stroke="#FDB813" stroke-width="4" fill="none"/>
+                        <circle cx="50" cy="35" r="8" fill="#FDB813"/>
+                    </svg>
+                </div>
+                <h2 class="section-title">BAT-SIGNAL</h2>
+            </div>
+
+            <div class="bat-card">
+                <div style="text-align: center; padding: 2rem 0;">
+                    <p style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--bat-gold); max-width: 900px; margin: 0 auto 3rem; font-style: italic;">
+                        "When that signal hits the sky, it's not just a call. It's a warning to those who prey on innovation. 
+                        The Dark Developer is watching. Ready to build systems that protect the innocent and bring order to digital chaos."
+                    </p>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-module">
+                    <div class="contact-icon">⚡</div>
+                    <div class="contact-label">GITHUB</div>
+                    <div class="contact-value">github.com/ck-ahmad</div>
+                </div>
+                <div class="contact-module">
+                    <div class="contact-icon">🔗</div>
+                    <div class="contact-label">LINKEDIN</div>
+                    <div class="contact-value">linkedin.com/in/ahmad0763</div>
+                </div>
+                <div class="contact-module">
+                    <div class="contact-icon">✉</div>
+                    <div class="contact-label">EMAIL</div>
+                    <div class="contact-value">ahmadleo498@gmail.com</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="https://github.com/ck-ahmad" class="bat-button" target="_blank">GITHUB</a>
+                <a href="https://linkedin.com/in/ahmad0763" class="bat-button" target="_blank">LINKEDIN</a>
+                <a href="mailto:ahmadleo498@gmail.com" class="bat-button" target="_blank">EMAIL</a>
+            </div>
         </div>
-        
-        <p class="contact-cta">
-            Looking for a software engineer who ships quality code? Let's build something amazing.
-        </p>
-        <div class="social-links">
-            <a href="https://github.com/ck-ahmad" class="btn" target="_blank"><span>GitHub</span></a>
-            <a href="https://linkedin.com/in/ahmad0763" class="btn" target="_blank"><span>LinkedIn</span></a>
-            <a href="mailto:ahmadleo498@gmail.com" class="btn" target="_blank"><span>Email</span></a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bat">
+                <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60,10 L72,15 L84,13 L94,20 L100,18 L106,26 L108,24 L112,30 L112,34 L108,36 L106,40 L100,38 L94,44 L84,42 L72,46 L60,40 L48,46 L36,42 L26,44 L20,38 L14,40 L12,36 L8,34 L8,30 L12,24 L14,26 L20,18 L26,20 L36,13 L48,15 Z" 
+                          fill="#FDB813"/>
+                </svg>
+            </div>
+            <p class="footer-title">THE DARK DEVELOPER</p>
+            <p class="footer-quote">"A hero can be anyone. Even a man doing something as simple and reassuring as writing clean code."</p>
+            <p class="footer-copyright">© 2026 AHMAD ABDULLAH • GOTHAM'S PROTECTOR • POWERED BY DETERMINATION</p>
+            <p class="footer-copyright" style="margin-top: 1rem;">BATMAN™ INSPIRED • JUSTICE THROUGH CODE</p>
         </div>
-    </div>
-</section>
+    </footer>
 
-<footer>
-    <div class="container">
-        © 2026 Ahmad Abdullah | Crafted with Python & Three.js 🚀
-        <br>
-        Contact : ahmadleo498@gmail.com
-    </div>
-</footer>
-
-<script>
-    // Three.js Blue Galaxy particle system
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('scene-container').appendChild(renderer.domElement);
-
-    // Create multi-layered particle system
-    const blueParticles = new THREE.BufferGeometry();
-    const cyanParticles = new THREE.BufferGeometry();
-    const purpleParticles = new THREE.BufferGeometry();
-    const particlesCount = 2500;
-    
-    const bluePosArray = new Float32Array(particlesCount * 3);
-    const cyanPosArray = new Float32Array(particlesCount * 3);
-    const purplePosArray = new Float32Array(particlesCount * 3);
-
-    for(let i = 0; i < particlesCount * 3; i++) {
-        bluePosArray[i] = (Math.random() - 0.5) * 180;
-        cyanPosArray[i] = (Math.random() - 0.5) * 180;
-        purplePosArray[i] = (Math.random() - 0.5) * 180;
-    }
-
-    blueParticles.setAttribute('position', new THREE.BufferAttribute(bluePosArray, 3));
-    cyanParticles.setAttribute('position', new THREE.BufferAttribute(cyanPosArray, 3));
-    purpleParticles.setAttribute('position', new THREE.BufferAttribute(purplePosArray, 3));
-
-    const blueMaterial = new THREE.PointsMaterial({
-        size: 0.15,
-        color: 0x3b82f6,
-        transparent: true,
-        opacity: 0.9,
-        blending: THREE.AdditiveBlending
-    });
-
-    const cyanMaterial = new THREE.PointsMaterial({
-        size: 0.1,
-        color: 0x06b6d4,
-        transparent: true,
-        opacity: 0.7,
-        blending: THREE.AdditiveBlending
-    });
-
-    const purpleMaterial = new THREE.PointsMaterial({
-        size: 0.08,
-        color: 0x8b5cf6,
-        transparent: true,
-        opacity: 0.5,
-        blending: THREE.AdditiveBlending
-    });
-
-    const blueMesh = new THREE.Points(blueParticles, blueMaterial);
-    const cyanMesh = new THREE.Points(cyanParticles, cyanMaterial);
-    const purpleMesh = new THREE.Points(purpleParticles, purpleMaterial);
-    
-    scene.add(blueMesh);
-    scene.add(cyanMesh);
-    scene.add(purpleMesh);
-
-    camera.position.z = 50;
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        blueMesh.rotation.x += 0.0004;
-        blueMesh.rotation.y += 0.0006;
-        
-        cyanMesh.rotation.x -= 0.0003;
-        cyanMesh.rotation.y -= 0.0005;
-
-        purpleMesh.rotation.x += 0.0002;
-        purpleMesh.rotation.y += 0.0003;
-
-        targetX += (mouseX * 15 - targetX) * 0.02;
-        targetY += (-mouseY * 15 - targetY) * 0.02;
-
-        camera.position.x = targetX;
-        camera.position.y = targetY;
-        camera.lookAt(scene.position);
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Scroll animations with Intersection Observer
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
+    <script>
+        // Enhanced parallax for bat signal
+        document.addEventListener('mousemove', (e) => {
+            const signal = document.querySelector('.bat-signal-container');
+            const moveX = (e.clientX - window.innerWidth / 2) / 30;
+            const moveY = (e.clientY - window.innerHeight / 2) / 30;
+            signal.style.transform = `translate(calc(-50% + ${moveX}px), ${moveY}px)`;
         });
-    }, observerOptions);
 
-    document.querySelectorAll('.terminal-card, .stat-card, .experience-item, .project-card, .skill-category-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
-        observer.observe(el);
-    });
-</script>
+        // Lightning strike effect
+        function triggerLightning() {
+            const lightning = document.querySelector('.lightning');
+            lightning.style.animation = 'none';
+            setTimeout(() => {
+                lightning.style.animation = '';
+            }, 100);
+        }
 
+        // Random lightning
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                triggerLightning();
+            }
+        }, 10000);
 
+        // Scroll animations with dramatic entrance
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with staggered delays
+        document.querySelectorAll('.bat-card, .bat-computer, .stat-module, .timeline-item, .project-module, .contact-module').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(80px) scale(0.9)';
+            el.style.transition = `all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // Building light flicker
+        const buildings = document.querySelectorAll('.building');
+        buildings.forEach((building, i) => {
+            setInterval(() => {
+                building.style.opacity = Math.random() > 0.5 ? '0.85' : '0.95';
+            }, 2000 + (i * 500));
+        });
+
+        // Dramatic page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                triggerLightning();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
