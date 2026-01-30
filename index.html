@@ -78,7 +78,7 @@
         .building:nth-child(6) { left: 72%; width: 14%; height: 320px; animation-delay: 2.5s; }
         .building:nth-child(7) { left: 87%; width: 13%; height: 260px; animation-delay: 3s; }
 
-        /* Massive Bat Signal */
+        /* Bat Signal */
         .bat-signal-container {
             position: fixed;
             top: 0;
@@ -220,11 +220,11 @@
 
         .hero-title {
             font-family: 'Cinzel', serif;
-            font-size: clamp(4rem, 12vw, 10rem);
+            font-size: clamp(3rem, 12vw, 10rem);
             font-weight: 900;
             color: var(--bat-gold);
             text-transform: uppercase;
-            letter-spacing: 20px;
+            letter-spacing: clamp(8px, 3vw, 20px);
             text-shadow: 
                 0 0 30px var(--bat-glow),
                 0 0 60px var(--bat-glow),
@@ -236,15 +236,15 @@
         }
 
         @keyframes titleDramatic {
-            0% { opacity: 0; transform: scale(0.5); letter-spacing: 40px; }
-            100% { opacity: 1; transform: scale(1); letter-spacing: 20px; }
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .hero-subtitle {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-size: clamp(1.3rem, 4vw, 2.5rem);
             color: #999;
-            letter-spacing: 8px;
+            letter-spacing: clamp(3px, 1.5vw, 6px);
             margin-bottom: 1rem;
             text-transform: uppercase;
             animation: fadeInUp 2s ease-out 0.5s forwards;
@@ -258,12 +258,12 @@
 
         .hero-quote {
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-size: clamp(1rem, 2vw, 1.5rem);
             color: var(--bat-gold);
             font-style: italic;
             margin: 2rem auto;
             max-width: 900px;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             border-left: 4px solid var(--bat-gold);
             border-right: 4px solid var(--bat-gold);
             background: rgba(253, 184, 19, 0.05);
@@ -302,7 +302,7 @@
         }
 
         .warning-tape::after {
-            content: '⚠ CLASSIFIED INTEL ⚠ AUTHORIZED PERSONNEL ONLY ⚠ CLASSIFIED INTEL ⚠';
+            content: '⚠ CLASSIFIED INTEL ⚠';
             position: absolute;
             top: -25px;
             left: 0;
@@ -310,25 +310,25 @@
             text-align: center;
             color: var(--bat-gold);
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 4px;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            letter-spacing: 2px;
         }
 
         /* Section headers */
         .section {
-            padding: 6rem 0;
+            padding: 4rem 0;
             position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
             position: relative;
         }
 
         .section-icon {
-            width: 100px;
-            height: 100px;
+            width: clamp(60px, 15vw, 100px);
+            height: clamp(60px, 15vw, 100px);
             margin: 0 auto 2rem;
             filter: drop-shadow(0 0 30px var(--bat-glow));
         }
@@ -341,10 +341,10 @@
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: clamp(3rem, 6vw, 5rem);
+            font-size: clamp(2rem, 6vw, 5rem);
             color: var(--bat-gold);
             text-transform: uppercase;
-            letter-spacing: 10px;
+            letter-spacing: clamp(4px, 2vw, 10px);
             margin-bottom: 1rem;
             text-shadow: 
                 0 0 30px var(--bat-glow),
@@ -356,7 +356,7 @@
         .section-title::after {
             content: '◆';
             color: var(--bat-gold);
-            margin: 0 2rem;
+            margin: 0 1rem;
             font-size: 0.5em;
             opacity: 0.6;
         }
@@ -370,18 +370,18 @@
                 0 0 0 1px var(--bat-gold),
                 0 20px 60px rgba(0, 0, 0, 0.9),
                 inset 0 0 80px rgba(0, 0, 0, 0.5);
-            padding: 3rem;
+            padding: 2rem;
             margin: 2rem 0;
             position: relative;
             overflow: hidden;
             transition: all 0.5s ease;
             clip-path: polygon(
                 0 0, 
-                calc(100% - 30px) 0, 
-                100% 30px, 
+                calc(100% - 20px) 0, 
+                100% 20px, 
                 100% 100%, 
-                30px 100%, 
-                0 calc(100% - 30px)
+                20px 100%, 
+                0 calc(100% - 20px)
             );
         }
 
@@ -405,7 +405,7 @@
                 0 0 40px var(--bat-glow),
                 0 30px 80px rgba(0, 0, 0, 0.9),
                 inset 0 0 80px rgba(0, 0, 0, 0.5);
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         .bat-card:hover::before {
@@ -429,25 +429,27 @@
         .bat-computer-header {
             background: linear-gradient(135deg, var(--bat-gold) 0%, #DAA520 100%);
             color: var(--gotham-black);
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 2px solid var(--bat-gold);
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .bat-computer-status {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             align-items: center;
         }
 
         .status-indicator {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: var(--danger-red);
             box-shadow: 0 0 10px var(--danger-red);
@@ -465,15 +467,18 @@
         }
 
         .bat-computer-body {
-            padding: 2rem;
+            padding: 1.5rem;
             color: var(--bat-gold);
-            line-height: 2;
-            font-size: 1.1rem;
+            line-height: 1.8;
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            overflow-x: auto;
         }
 
         .code-line {
             margin: 0.5rem 0;
             text-shadow: 0 0 5px var(--bat-glow);
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .code-keyword { color: #FFD700; font-weight: bold; }
@@ -484,18 +489,18 @@
             font-style: italic;
         }
 
-        /* Stats - Bat-tech style */
+        /* Stats */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             margin: 4rem 0;
         }
 
         .stat-module {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             border: 3px solid var(--bat-gold);
-            padding: 3rem 2rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -525,18 +530,18 @@
             box-shadow: 
                 0 0 50px var(--bat-glow),
                 inset 0 0 40px rgba(253, 184, 19, 0.1);
-            transform: translateY(-15px) scale(1.05);
+            transform: translateY(-10px) scale(1.03);
         }
 
         .stat-icon {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 1rem;
             filter: drop-shadow(0 0 20px var(--bat-glow));
         }
 
         .stat-number {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 6rem;
+            font-size: clamp(3.5rem, 10vw, 6rem);
             color: var(--bat-gold);
             line-height: 1;
             margin-bottom: 1rem;
@@ -547,13 +552,13 @@
 
         .stat-label {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
             color: #999;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
-        /* Timeline - Wayne Enterprises style */
+        /* Timeline */
         .timeline {
             position: relative;
             padding: 3rem 0;
@@ -562,7 +567,7 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 50%;
+            left: 30px;
             top: 0;
             bottom: 0;
             width: 4px;
@@ -573,29 +578,19 @@
                 var(--bat-gold)
             );
             box-shadow: 0 0 20px var(--bat-glow);
-            transform: translateX(-50%);
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 6rem;
-            width: calc(50% - 60px);
-        }
-
-        .timeline-item:nth-child(odd) {
-            margin-left: 0;
-            text-align: right;
-            padding-right: 80px;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-left: calc(50% + 60px);
-            padding-left: 80px;
+            margin-bottom: 4rem;
+            padding-left: 100px;
+            width: 100%;
         }
 
         .timeline-marker {
             position: absolute;
-            top: 30px;
+            left: 0;
+            top: 20px;
             width: 60px;
             height: 60px;
             background: var(--gotham-black);
@@ -610,14 +605,6 @@
             z-index: 10;
         }
 
-        .timeline-item:nth-child(odd) .timeline-marker {
-            right: -110px;
-        }
-
-        .timeline-item:nth-child(even) .timeline-marker {
-            left: -110px;
-        }
-
         .timeline-marker svg {
             width: 30px;
             height: 30px;
@@ -628,7 +615,7 @@
         .timeline-content {
             background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
             border: 2px solid var(--gotham-shadow);
-            padding: 2.5rem;
+            padding: 2rem 1.5rem;
             transition: all 0.4s ease;
             position: relative;
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
@@ -642,15 +629,15 @@
 
         .timeline-role {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             color: var(--bat-gold);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 20px var(--bat-glow);
         }
 
         .timeline-company {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
             color: #DAA520;
             margin-bottom: 0.5rem;
             font-weight: 600;
@@ -658,18 +645,18 @@
 
         .timeline-date {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
             color: #666;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .timeline-desc {
             color: #b0b0b0;
-            line-height: 1.8;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
         }
 
         .timeline-points {
@@ -678,11 +665,11 @@
         }
 
         .timeline-points li {
-            padding-left: 2rem;
+            padding-left: 1.5rem;
             margin-bottom: 1rem;
             color: #999;
             position: relative;
-            font-size: 1.05rem;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
         }
 
         .timeline-points li::before {
@@ -690,15 +677,15 @@
             position: absolute;
             left: 0;
             color: var(--bat-gold);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-shadow: 0 0 10px var(--bat-glow);
         }
 
-        /* Projects - Bat-gadgets */
+        /* Projects */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin: 4rem 0;
         }
 
@@ -725,7 +712,7 @@
         }
 
         .project-module:hover {
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             box-shadow: 
                 0 0 60px var(--bat-glow),
                 0 30px 80px rgba(0, 0, 0, 0.9);
@@ -737,7 +724,7 @@
 
         .project-header {
             background: linear-gradient(135deg, var(--bat-gold) 0%, #DAA520 100%);
-            padding: 2rem;
+            padding: 1.5rem;
             border-bottom: 3px solid var(--bat-gold);
             position: relative;
         }
@@ -746,45 +733,45 @@
             content: '◆';
             position: absolute;
             top: 1rem;
-            right: 2rem;
-            font-size: 3rem;
+            right: 1.5rem;
+            font-size: 2rem;
             color: rgba(0, 0, 0, 0.2);
         }
 
         .project-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: var(--gotham-black);
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .project-body {
-            padding: 2.5rem;
+            padding: 2rem 1.5rem;
         }
 
         .project-desc {
             color: #b0b0b0;
-            line-height: 1.9;
+            line-height: 1.8;
             margin-bottom: 2rem;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
         }
 
         .tech-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.75rem;
             margin: 2rem 0;
         }
 
         .tech-badge {
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             background: var(--gotham-black);
             border: 2px solid var(--bat-gold);
             color: var(--bat-gold);
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            letter-spacing: 1.5px;
             clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
             transition: all 0.3s ease;
             text-shadow: 0 0 10px var(--bat-glow);
@@ -793,21 +780,21 @@
         .tech-badge:hover {
             background: var(--bat-gold);
             color: var(--gotham-black);
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 0 20px var(--bat-glow);
         }
 
-        /* Buttons - Bat-style */
+        /* Buttons */
         .bat-button {
             display: inline-block;
-            padding: 1.2rem 3rem;
+            padding: 1rem 2rem;
             background: linear-gradient(135deg, var(--gotham-shadow) 0%, var(--gotham-black) 100%);
             border: 3px solid var(--bat-gold);
             color: var(--bat-gold);
             text-decoration: none;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.6rem;
-            letter-spacing: 4px;
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            letter-spacing: 3px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -833,25 +820,25 @@
             box-shadow: 
                 0 0 40px var(--bat-glow),
                 0 10px 30px rgba(0, 0, 0, 0.8);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .bat-button:hover::before {
             left: 0;
         }
 
-        /* Contact - Bat-signal style */
+        /* Contact */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
             margin: 4rem 0;
         }
 
         .contact-module {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             border: 2px solid var(--gotham-shadow);
-            padding: 3rem 2rem;
+            padding: 2.5rem 1.5rem;
             text-align: center;
             position: relative;
             transition: all 0.4s ease;
@@ -879,42 +866,43 @@
         .contact-module:hover {
             border-color: var(--bat-gold);
             box-shadow: 0 0 50px var(--bat-glow);
-            transform: translateY(-10px);
+            transform: translateY(-8px);
         }
 
         .contact-icon {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             margin-bottom: 1.5rem;
             filter: drop-shadow(0 0 30px var(--bat-glow));
         }
 
         .contact-label {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
             color: var(--bat-gold);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-bottom: 1rem;
             text-shadow: 0 0 20px var(--bat-glow);
         }
 
         .contact-value {
             color: #999;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            word-break: break-word;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 6rem 0 3rem;
+            padding: 4rem 0 2rem;
             border-top: 3px solid var(--bat-gold);
-            margin-top: 8rem;
+            margin-top: 6rem;
             background: linear-gradient(to bottom, transparent, var(--gotham-black));
             position: relative;
         }
 
         .footer-bat {
-            width: 120px;
-            height: 60px;
+            width: clamp(80px, 20vw, 120px);
+            height: clamp(40px, 10vw, 60px);
             margin: 0 auto 2rem;
             filter: drop-shadow(0 0 30px var(--bat-glow));
         }
@@ -927,70 +915,187 @@
 
         .footer-title {
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
+            font-size: clamp(1.3rem, 3vw, 2rem);
             color: var(--bat-gold);
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             margin-bottom: 1rem;
             text-shadow: 0 0 30px var(--bat-glow);
         }
 
         .footer-quote {
             font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
+            font-size: clamp(0.95rem, 2vw, 1.3rem);
             color: #666;
             font-style: italic;
             margin: 1rem 0;
+            padding: 0 1rem;
         }
 
         .footer-copyright {
             font-family: 'Bebas Neue', sans-serif;
             color: #444;
-            font-size: 1rem;
-            letter-spacing: 2px;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            letter-spacing: 1px;
             margin-top: 2rem;
+            padding: 0 1rem;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero-bat-logo {
+                width: 200px;
+                height: 100px;
+                margin-bottom: 2rem;
+            }
+
+            .bat-signal-container {
+                width: 400px;
+                height: 400px;
+                opacity: 0.2;
+            }
+
+            .signal-beam {
+                width: 300px;
+                height: 300px;
+            }
+
+            .bat-signal-symbol {
+                width: 150px;
+                height: 150px;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-header {
+                margin-bottom: 3rem;
+            }
+
+            .bat-card {
+                padding: 1.5rem;
+                clip-path: polygon(
+                    0 0, 
+                    calc(100% - 15px) 0, 
+                    100% 15px, 
+                    100% 100%, 
+                    15px 100%, 
+                    0 calc(100% - 15px)
+                );
+            }
+
+            .bat-computer-body {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+                margin: 3rem 0;
+            }
+
+            .stat-module {
+                padding: 1.5rem 1rem;
+            }
+
+            .timeline {
+                padding: 2rem 0;
+            }
+
             .timeline::before {
-                left: 30px;
+                left: 20px;
             }
 
-            .timeline-item,
-            .timeline-item:nth-child(odd),
-            .timeline-item:nth-child(even) {
-                width: 100%;
-                margin-left: 0;
-                padding-left: 100px;
-                padding-right: 0;
-                text-align: left;
+            .timeline-item {
+                padding-left: 70px;
+                margin-bottom: 3rem;
             }
 
-            .timeline-marker,
-            .timeline-item:nth-child(odd) .timeline-marker,
-            .timeline-item:nth-child(even) .timeline-marker {
-                left: 0;
-                right: auto;
+            .timeline-marker {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+            }
+
+            .timeline-marker svg {
+                width: 25px;
+                height: 25px;
+            }
+
+            .timeline-content {
+                padding: 1.5rem 1rem;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-body {
+                padding: 1.5rem 1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .warning-tape {
+                margin: 3rem 0;
+            }
+
+            .bat-divider {
+                width: 100px;
+                height: 40px;
+                margin: 2rem auto;
+            }
+
+            .building:nth-child(3),
+            .building:nth-child(5) {
+                display: none;
+            }
+
+            /* Disable hover effects on touch devices */
+            .bat-card:hover,
+            .stat-module:hover,
+            .timeline-content:hover,
+            .project-module:hover,
+            .contact-module:hover {
+                transform: none;
+            }
+
+            .tech-badge:hover {
+                transform: none;
             }
         }
 
-        @media (max-width: 768px) {
-            .hero-bat-logo {
-                width: 250px;
-                height: 125px;
-            }
-
+        @media (max-width: 480px) {
             .hero-title {
-                font-size: 3.5rem;
-                letter-spacing: 8px;
+                font-size: 2.5rem;
             }
 
-            .section-title {
-                font-size: 2.5rem;
+            .section-title::before,
+            .section-title::after {
+                display: none;
+            }
+
+            .bat-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                margin: 0.3rem;
+            }
+
+            .warning-tape::after {
+                content: '⚠ CLASSIFIED ⚠';
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -1036,18 +1141,21 @@
                     <h1 class="hero-title">AHMAD</h1>
                 </div>
 
-                <p class="hero-subtitle">The Dark Knight of Code</p>
+                <p class="hero-subtitle">FAST NUCES '27 | Full Stack Developer @ GAOTek</p>
 
                 <div class="hero-quote">
-                    "It's not who I am underneath, but what I code that defines me."
+                    "2× Hackathon Winner | 25+ Projects | Backend Dev | Data Engineering | ML/AI"
                 </div>
 
                 <div class="tech-badges">
-                    <span class="tech-badge">PYTHON MASTER</span>
-                    <span class="tech-badge">BACKEND ARCHITECT</span>
-                    <span class="tech-badge">ML ENGINEER</span>
-                    <span class="tech-badge">API GUARDIAN</span>
-                    <span class="tech-badge">DATA PROTECTOR</span>
+                    <span class="tech-badge">PYTHON</span>
+                    <span class="tech-badge">C++</span>
+                    <span class="tech-badge">JAVASCRIPT</span>
+                    <span class="tech-badge">FLASK/FASTAPI</span>
+                    <span class="tech-badge">NODE.JS</span>
+                    <span class="tech-badge">ML/AI</span>
+                    <span class="tech-badge">PYSPARK</span>
+                    <span class="tech-badge">SQL & NOSQL</span>
                 </div>
             </div>
         </div>
@@ -1070,12 +1178,12 @@
 
             <div class="bat-computer">
                 <div class="bat-computer-header">
-                    <span>◆ BATCOMPUTER CLASSIFIED DATABASE ◆</span>
+                    <span>◆ BATCOMPUTER DATABASE ◆</span>
                     <div class="bat-computer-status">
                         <span class="status-indicator active"></span>
                         <span class="status-indicator active"></span>
-                        <span class="status-indicator"></span>
-                        <span style="font-size: 1rem;">SYSTEM ACTIVE</span>
+                        <span class="status-indicator active"></span>
+                        <span style="font-size: 0.8rem;">ACTIVE</span>
                     </div>
                 </div>
                 <div class="bat-computer-body">
@@ -1083,22 +1191,32 @@
                     <div class="code-line">    <span class="code-keyword">def</span> __init__(self):</div>
                     <div class="code-line">        self.identity = <span class="code-string">"Ahmad Abdullah"</span></div>
                     <div class="code-line">        self.alias = <span class="code-string">"The Dark Developer"</span></div>
-                    <div class="code-line">        self.mission = <span class="code-string">"Protect systems. Eliminate bugs. Bring order to chaos."</span></div>
-                    <div class="code-line">        self.training = <span class="code-string">"Computer Science @ FAST NUCES"</span></div>
-                    <div class="code-line">        self.current_operation = <span class="code-string">"Software Engineer @ Dev Weekends"</span></div>
-                    <div class="code-line">        self.years_active = <span class="code-string">"6+ Months of Night Patrols"</span></div>
-                    <div class="code-line">        self.base_of_operations = <span class="code-string">"Pakistan - The Eastern Watchtower"</span></div>
+                    <div class="code-line">        self.title = <span class="code-string">"Full Stack Dev @ GAOTek | SDE Mentee"</span></div>
+                    <div class="code-line">        self.mission = <span class="code-string">"Build scalable APIs. Engineer data. Deploy ML."</span></div>
+                    <div class="code-line">        self.education = <span class="code-string">"CS @ FAST NUCES '27"</span></div>
+                    <div class="code-line">        self.achievements = <span class="code-string">"2× Hackathon Winner | Top 10 @ IIT"</span></div>
+                    <div class="code-line">        self.portfolio = <span class="code-string">"25+ Production Projects"</span></div>
+                    <div class="code-line">        self.experience = <span class="code-string">"1.5+ Years Active Development"</span></div>
+                    <div class="code-line">        self.base = <span class="code-string">"Faisalabad, Punjab, Pakistan"</span></div>
                     <div class="code-line"></div>
                     <div class="code-line">    <span class="code-keyword">def</span> get_arsenal(self):</div>
                     <div class="code-line">        <span class="code-keyword">return</span> {</div>
-                    <div class="code-line">            <span class="code-string">"primary_weapons"</span>: [<span class="code-string">"Flask/FastAPI"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Python"</span>],</div>
-                    <div class="code-line">            <span class="code-string">"advanced_tech"</span>: [<span class="code-string">"ML/AI"</span>, <span class="code-string">"PySpark"</span>, <span class="code-string">"Data Engineering"</span>],</div>
-                    <div class="code-line">            <span class="code-string">"defense_systems"</span>: [<span class="code-string">"PostgreSQL"</span>, <span class="code-string">"MongoDB"</span>, <span class="code-string">"Docker"</span>],</div>
-                    <div class="code-line">            <span class="code-string">"tactical_gear"</span>: [<span class="code-string">"REST APIs"</span>, <span class="code-string">"ETL Pipelines"</span>, <span class="code-string">"JWT Auth"</span>]</div>
+                    <div class="code-line">            <span class="code-string">"languages"</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"C++"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"SQL"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"backend"</span>: [<span class="code-string">"Flask/FastAPI"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Express.js"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"databases"</span>: [<span class="code-string">"PostgreSQL"</span>, <span class="code-string">"MongoDB"</span>, <span class="code-string">"MySQL"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"ml_ai"</span>: [<span class="code-string">"PySpark"</span>, <span class="code-string">"scikit-learn"</span>, <span class="code-string">"Gemini AI"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"data_tools"</span>: [<span class="code-string">"Pandas"</span>, <span class="code-string">"NumPy"</span>, <span class="code-string">"Matplotlib"</span>],</div>
+                    <div class="code-line">            <span class="code-string">"devops"</span>: [<span class="code-string">"Docker"</span>, <span class="code-string">"Git"</span>, <span class="code-string">"Linux"</span>]</div>
                     <div class="code-line">        }</div>
                     <div class="code-line"></div>
-                    <div class="code-line"><span class="code-comment"># "Why do we code? So we can learn to build ourselves up."</span></div>
-                    <div class="code-line"><span class="code-comment"># Systems protected: MILLIONS OF DATA POINTS DAILY</span></div>
+                    <div class="code-line">    <span class="code-keyword">def</span> summary(self):</div>
+                    <div class="code-line">        <span class="code-keyword">return</span> <span class="code-string">"""</span></div>
+                    <div class="code-line"><span class="code-string">        CS student @ FAST NUCES, SDE mentee @ Dev Weekends.</span></div>
+                    <div class="code-line"><span class="code-string">        Building scalable APIs, ETL pipelines & ML systems.</span></div>
+                    <div class="code-line"><span class="code-string">        Top 3 in 2 hackathons. 25+ projects delivered.</span></div>
+                    <div class="code-line"><span class="code-string">        """</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="code-comment"># "It's not who I am underneath, but what I code that defines me."</span></div>
                 </div>
             </div>
 
@@ -1106,27 +1224,27 @@
                 <div class="stat-module">
                     <div class="stat-icon">⚡</div>
                     <div class="stat-number">25+</div>
-                    <div class="stat-label">Missions Completed</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-module">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-number">2×</div>
+                    <div class="stat-label">Hackathon Winner</div>
                 </div>
                 <div class="stat-module">
                     <div class="stat-icon">🦇</div>
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Alliances Formed</div>
-                </div>
-                <div class="stat-module">
-                    <div class="stat-icon">⬣</div>
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">Victories Won</div>
+                    <div class="stat-number">7+</div>
+                    <div class="stat-label">Internships</div>
                 </div>
                 <div class="stat-module">
                     <div class="stat-icon">◆</div>
-                    <div class="stat-number">6+</div>
-                    <div class="stat-label">Months In Service</div>
+                    <div class="stat-number">1.5+</div>
+                    <div class="stat-label">Years Experience</div>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 4rem;">
-                <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="bat-button" target="_blank">ACCESS DOSSIER</a>
+                <a href="https://docs.google.com/document/d/1XZ1YCHhZTxDLT_UlPb1UtY9E73Cd0ctaePXYOsJNGos/edit?usp=drive_link" class="bat-button" target="_blank">ACCESS FULL DOSSIER</a>
             </div>
         </div>
     </section>
@@ -1155,83 +1273,199 @@
             </div>
 
             <div class="timeline">
+                <!-- GAOTek -->
                 <div class="timeline-item">
                     <div class="timeline-marker">
                         <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
-                                  fill="#FDB813"/>
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
                         </svg>
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-role">FULL STACK DEVELOPER</div>
-                        <div class="timeline-company">GAOTEK Inc.</div>
-                        <div class="timeline-date">Jan 2026 – Present • Hybrid Operations</div>
+                        <div class="timeline-company">GAOTek Inc.</div>
+                        <div class="timeline-date">Jan 2026 – Present | Lahore, Pakistan</div>
                         <div class="timeline-desc">
-                            Leading the charge in architecting production-grade web applications with scalable REST APIs.
+                            Building scalable, secure, high-performance web applications using Python Flask and Node.js. Designing complete systems from UI to database with modern architecture.
                         </div>
                         <ul class="timeline-points">
-                            <li>Engineered async REST APIs handling 100K+ requests daily using Flask/FastAPI & Express.js</li>
-                            <li>Built full-stack applications with Node.js and Flask/FastAPI frameworks</li>
-                            <li>Deployed database solutions with PostgreSQL, MongoDB, SQLAlchemy, and PyMongo</li>
+                            <li>Developed RESTful APIs using Python Flask processing 100K+ daily requests</li>
+                            <li>Built interactive, responsive frontends with HTML5, CSS3, JavaScript</li>
+                            <li>Developed server-side services using Node.js for real-time systems</li>
+                            <li>Implemented JWT authentication, sessions, and role-based access control</li>
+                            <li>Designed and managed MySQL, MongoDB, PLSQL databases</li>
+                            <li>Integrated payment gateways and third-party APIs</li>
+                            <li>Optimized applications for performance and security</li>
+                            <li>Delivered complete admin panels, dashboards, and client systems from scratch</li>
                         </ul>
                     </div>
                 </div>
 
+                <!-- Fiverr -->
                 <div class="timeline-item">
                     <div class="timeline-marker">
                         <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
-                                  fill="#FDB813"/>
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">SOFTWARE DEVELOPER</div>
+                        <div class="timeline-company">Fiverr (Freelance)</div>
+                        <div class="timeline-date">Nov 2025 – Present | Remote</div>
+                        <ul class="timeline-points">
+                            <li>Building scalable web applications, REST APIs, and ETL/ELT pipelines with Python, Flask, Node.js</li>
+                            <li>Working with SQL & NoSQL databases (MySQL, MongoDB) for data-driven solutions</li>
+                            <li>Implementing ML models, preprocessing data, transforming datasets into insights</li>
+                            <li>Delivered interactive platforms, AI-powered applications, and dashboards</li>
+                            <li>Analytics & visualization using Pandas, NumPy, Matplotlib, Seaborn</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dev Weekends -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
                         </svg>
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-role">SDE MENTEE</div>
                         <div class="timeline-company">Dev Weekends</div>
-                        <div class="timeline-date">Nov 2025 – Present • Pakistan</div>
+                        <div class="timeline-date">Nov 2025 – Present | Pakistan</div>
                         <div class="timeline-desc">
-                            Intensive training program focused on advanced algorithms, system architecture, and combat-ready code.
+                            4-month intensive mentorship program focusing on engineering depth, DSA fundamentals, and real-world projects under industry guidance.
                         </div>
                         <ul class="timeline-points">
-                            <li>Mastered Python DSA implementation and competitive programming techniques</li>
-                            <li>System design mastery: scalability, caching, distributed systems architecture</li>
-                            <li>Built production-grade applications following SOLID principles and design patterns</li>
+                            <li>30 DSA grind sessions on patterns, logic, and interview-level problem solving</li>
+                            <li>12 engineering weekends covering system design and backend fundamentals</li>
+                            <li>Building portfolio-ready projects with mentor guidance</li>
+                            <li>Mock interviews, career guidance, and skill refinement</li>
+                            <li>System design mastery: scalability, caching, distributed systems</li>
+                            <li>Production apps following SOLID principles and design patterns</li>
                         </ul>
                     </div>
                 </div>
 
+                <!-- Softsincs -->
                 <div class="timeline-item">
                     <div class="timeline-marker">
                         <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
-                                  fill="#FDB813"/>
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
                         </svg>
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-role">ML/DATA ENGINEER</div>
                         <div class="timeline-company">Softsincs</div>
-                        <div class="timeline-date">Aug 2025 – Sep 2025 • Lahore</div>
+                        <div class="timeline-date">Aug 2025 – Sep 2025 | Lahore, Pakistan</div>
+                        <div class="timeline-desc">
+                            Designed scalable data pipelines and applied ML techniques to solve real-world problems, bridging data engineering and data science.
+                        </div>
                         <ul class="timeline-points">
-                            <li>Constructed data pipelines with PySpark processing massive datasets</li>
-                            <li>Deployed production ML systems using scikit-learn for real-world applications</li>
-                            <li>Engineered feature pipelines improving model accuracy by 23%</li>
+                            <li>Built data pipelines with PySpark processing large-scale datasets</li>
+                            <li>Deployed production ML systems using scikit-learn</li>
+                            <li>Engineered features improving model accuracy by 23%</li>
+                            <li>Transformed raw data into structured datasets for analytics and AI</li>
                         </ul>
                     </div>
                 </div>
 
+                <!-- MKA AI -->
                 <div class="timeline-item">
                     <div class="timeline-marker">
                         <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" 
-                                  fill="#FDB813"/>
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">ML/DATA ENGINEER</div>
+                        <div class="timeline-company">MKA AI</div>
+                        <div class="timeline-date">Aug 2025 | Remote (Cairo, Egypt)</div>
+                        <ul class="timeline-points">
+                            <li>Worked with cross-functional remote team on end-to-end ML lifecycle</li>
+                            <li>Cleaned & preprocessed large datasets using NumPy & Pandas</li>
+                            <li>Conducted EDA and engineered features for improved model performance</li>
+                            <li>Trained & evaluated ML models with hyperparameter tuning</li>
+                            <li>Data visualization with Seaborn & Matplotlib</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Elevvo Pathways -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
                         </svg>
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-role">DATA ANALYST</div>
                         <div class="timeline-company">Elevvo Pathways</div>
-                        <div class="timeline-date">Jul 2025 – Aug 2025 • Remote</div>
+                        <div class="timeline-date">Jul 2025 – Aug 2025 | Remote (Cairo, Egypt)</div>
                         <ul class="timeline-points">
-                            <li>Automated workflows with Python reducing manual effort by 40%</li>
-                            <li>Conducted statistical analysis with NumPy & Pandas for data-driven decisions</li>
+                            <li>Data cleaning, preprocessing, and exploratory analysis using Python & SQL</li>
+                            <li>Developed interactive dashboards with Power BI/Tableau</li>
+                            <li>Analyzed customer behavior and performance metrics for strategic decisions</li>
+                            <li>Automated data workflows reducing manual effort by 40%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Oasis Infobyte -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">PYTHON DEVELOPER</div>
+                        <div class="timeline-company">Oasis Infobyte</div>
+                        <div class="timeline-date">Jul 2025 | Pakistan</div>
+                        <ul class="timeline-points">
+                            <li>Built mini-projects using Python including CLI tools and automation scripts</li>
+                            <li>Strengthened OOP, file handling, and error handling concepts</li>
+                            <li>Applied best practices for clean, efficient, maintainable code</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Codveda Technologies -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">PYTHON DEVELOPER</div>
+                        <div class="timeline-company">Codveda Technologies (Paid)</div>
+                        <div class="timeline-date">Jul 2025 | Punjab, Pakistan</div>
+                        <ul class="timeline-points">
+                            <li>Worked on real-world software development projects using Python</li>
+                            <li>Contributed to agile-based tasks and sprints with senior developers</li>
+                            <li>Enhanced understanding of clean code, modular design, scalable architecture</li>
+                            <li>Performed debugging and wrote unit tests for quality assurance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CodeAlpha -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15,5 L18,8 L21,7 L23,10 L25,9 L27,12 L27,15 L25,17 L23,19 L21,18 L18,22 L15,20 L12,22 L9,18 L7,19 L5,17 L3,15 L3,12 L5,9 L7,10 L9,7 L12,8 Z" fill="#FDB813"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-role">PYTHON DEVELOPER</div>
+                        <div class="timeline-company">CodeAlpha</div>
+                        <div class="timeline-date">Jun 2025 – Jul 2025 | Punjab, Pakistan</div>
+                        <ul class="timeline-points">
+                            <li>Core Python Programming — Clean, efficient, scalable code</li>
+                            <li>OOP — Modular, reusable software components</li>
+                            <li>Data Structures & Algorithms — Efficient logic implementation</li>
+                            <li>API Integration & Data Handling — Fetching and processing live data</li>
+                            <li>Projects: Hangman Game, Stock Portfolio Tracker, AI Chatbot</li>
                         </ul>
                     </div>
                 </div>
@@ -1240,6 +1474,136 @@
     </section>
 
     <div class="warning-tape"></div>
+
+    <!-- Hackathons Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50,10 L60,25 L77,25 L63,38 L68,55 L50,43 L32,55 L37,38 L23,25 L40,25 Z" fill="none" stroke="#FDB813" stroke-width="4"/>
+                    </svg>
+                </div>
+                <h2 class="section-title">VICTORIES</h2>
+            </div>
+
+            <div class="projects-grid">
+                <!-- VIDE-E-THON -->
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">VIDE-E-THON 2025</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="timeline-company">VibeCode | GDG Cloud Lahore</div>
+                        <div class="timeline-date">Dec 2025 | Top 10</div>
+                        <div class="project-desc">
+                            Student AI Assistant 2.0 — 24-hour innovation marathon. Adaptive Q&A system, AI-powered study planner, 
+                            productivity suite with task breakdowns, topic extraction and summarization, voice-first interaction, 
+                            and minimalist UX designed for modern students.
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">PYTHON</span>
+                            <span class="tech-badge">FLASK</span>
+                            <span class="tech-badge">GEMINI API</span>
+                            <span class="tech-badge">NLP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WebMind Innovation -->
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">AI NOTE-TAKER</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="timeline-company">WebMind Innovation Hackathon 2025</div>
+                        <div class="project-desc">
+                            Smart Flask-based ETL pipeline applying Extract-Transform-Load to lecture audio using Gemini API. 
+                            Transcribes, summarizes, generates flashcards, translates to Urdu, and creates audio summaries. 
+                            Making education more inclusive for Pakistani students.
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">FLASK</span>
+                            <span class="tech-badge">ETL</span>
+                            <span class="tech-badge">SPEECH RECOGNITION</span>
+                            <span class="tech-badge">GEMINI</span>
+                        </div>
+                        <div style="margin-top: 2rem;">
+                            <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="bat-button" target="_blank">GITHUB</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bay2BayHacks -->
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">CARBON TRACKER</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="timeline-company">Bay2BayHacks 2025 | $100 Prize</div>
+                        <div class="project-desc">
+                            Carbon Emission Tracker using OpenAI, Flask, Python, and MongoDB. Tracks and analyzes carbon footprints, 
+                            provides real-time insights, and encourages sustainable practices through AI-driven recommendations.
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">OPENAI</span>
+                            <span class="tech-badge">FLASK</span>
+                            <span class="tech-badge">MONGODB</span>
+                            <span class="tech-badge">PYTHON</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IIT Kanpur -->
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">TONY AI</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="timeline-company">IIT Kanpur TechFest | Top 10</div>
+                        <div class="timeline-date">Nov 2024 | Representing FAST NUCES</div>
+                        <div class="project-desc">
+                            Multifunctional AI-powered personal assistant built in Python. Features task scheduling, reminders, 
+                            weather forecasts, speech recognition, text-to-speech, and system control capabilities.
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">PYTHON</span>
+                            <span class="tech-badge">SPEECH RECOGNITION</span>
+                            <span class="tech-badge">TTS</span>
+                            <span class="tech-badge">APIs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Derives Manager -->
+                <div class="project-module">
+                    <div class="project-header">
+                        <div class="project-title">DERIVES MANAGER</div>
+                    </div>
+                    <div class="project-body">
+                        <div class="timeline-company">American Education International | 3rd Place Winner</div>
+                        <div class="timeline-date">Nov 2024</div>
+                        <div class="project-desc">
+                            Intelligent real-time mathematical expression solver. Smart expression parser, step-by-step explanations, 
+                            responsive UI, high-precision algorithms, voice command support. Recognized for Innovation in EdTech.
+                        </div>
+                        <div class="tech-badges">
+                            <span class="tech-badge">PYTHON</span>
+                            <span class="tech-badge">SPEECH RECOGNITION</span>
+                            <span class="tech-badge">ALGORITHMS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bat-divider">
+        <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg">
+            <path d="M75,10 L90,18 L105,15 L118,25 L125,22 L132,32 L135,30 L140,38 L140,42 L135,45 L132,50 L125,47 L118,55 L105,52 L90,58 L75,50 L60,58 L45,52 L32,55 L25,47 L18,50 L15,45 L10,42 L10,38 L15,30 L18,32 L25,22 L32,25 L45,15 L60,18 Z" 
+                  fill="#FDB813"/>
+        </svg>
+    </div>
 
     <!-- Projects Section -->
     <section class="section">
@@ -1258,106 +1622,23 @@
                 <h2 class="section-title">ARSENAL</h2>
             </div>
 
-            <div class="projects-grid">
-                <div class="project-module">
-                    <div class="project-header">
-                        <div class="project-title">STUDENT AI ASSISTANT 2.0</div>
-                    </div>
-                    <div class="project-body">
-                        <div class="project-desc">
-                            Advanced AI platform engineered with Flask/FastAPI backend, featuring adaptive Q&A powered by Gemini API, 
-                            automated study planning algorithms, and NLP-driven voice interaction. Achieved Top 10 placement 
-                            in VibeCode's VIDE-E-THON 2025 competition.
-                        </div>
-                        <div class="tech-badges">
-                            <span class="tech-badge">PYTHON</span>
-                            <span class="tech-badge">Flask/FastAPI</span>
-                            <span class="tech-badge">GEMINI API</span>
-                            <span class="tech-badge">NLP</span>
-                            <span class="tech-badge">CLOUDINARY</span>
-                        </div>
-                        <div style="margin-top: 2rem;">
-                            <a href="https://github.com/ck-ahmad/Student_AI_Assistant" class="bat-button" target="_blank">ACCESS PROJECT</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-module">
-                    <div class="project-header">
-                        <div class="project-title">AI NOTE GENERATOR</div>
-                    </div>
-                    <div class="project-body">
-                        <div class="project-desc">
-                            Production-grade AI platform built with Flask/FastAPI, featuring sophisticated ETL pipelines integrated 
-                            with Gemini API, automated note generation and transcription capabilities, and advanced 
-                            voice interaction powered by cutting-edge NLP technology.
-                        </div>
-                        <div class="tech-badges">
-                            <span class="tech-badge">PYTHON</span>
-                            <span class="tech-badge">Flask/FastAPI</span>
-                            <span class="tech-badge">ETL PIPELINES</span>
-                            <span class="tech-badge">GEMINI API</span>
-                            <span class="tech-badge">NLP</span>
-                        </div>
-                        <div style="margin-top: 2rem;">
-                            <a href="https://github.com/ck-ahmad/EduHacks_AI_Note_Creator" class="bat-button" target="_blank">ACCESS PROJECT</a>
-                        </div>
-                    </div>
+            <div class="bat-card">
+                <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--bat-gold); margin-bottom: 1.5rem; text-shadow: 0 0 20px var(--bat-glow);">PERSONAL PROJECTS (25+)</h3>
+                <div style="color: #b0b0b0; line-height: 1.8; font-size: 1.1rem;">
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>Portfolio & Showcases:</strong> Personal website, AstroHub, Galaxify</p>
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>AI Applications:</strong> AI Assistant 2.0, Student AI Assistant 2.0, AI Note Generator, AI Claude IDE 1.0</p>
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>APIs & Services:</strong> Custom Offline Translator API, AI Note Generator API, Weather API</p>
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>Python Projects:</strong> Tony AI 1.0 (voice assistant), Student Assistant 1.0, Drive Manager</p>
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>Data Science:</strong> Pokec Social Network Analysis (large-scale dataset)</p>
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>C++ Projects:</strong> Nyan Cat Game (OOP), Google Drive Manager (DSA), Sudoku Game</p>
+                    <p style="margin-bottom: 1rem;"><span style="color: var(--bat-gold);">⬣</span> <strong>Utilities:</strong> Basic Translator, various automation tools</p>
+                    <p style="margin-top: 1.5rem; color: #888; font-style: italic;">All projects available on GitHub for exploration →</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <div class="bat-divider">
-        <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg">
-            <path d="M75,10 L90,18 L105,15 L118,25 L125,22 L132,32 L135,30 L140,38 L140,42 L135,45 L132,50 L125,47 L118,55 L105,52 L90,58 L75,50 L60,58 L45,52 L32,55 L25,47 L18,50 L15,45 L10,42 L10,38 L15,30 L18,32 L25,22 L32,25 L45,15 L60,18 Z" 
-                  fill="#FDB813"/>
-        </svg>
-    </div>
-
-    <!-- Tech Stack Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-icon">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="30" width="60" height="40" fill="none" stroke="#FDB813" stroke-width="4"/>
-                        <line x1="30" y1="40" x2="70" y2="40" stroke="#FDB813" stroke-width="3"/>
-                        <line x1="30" y1="50" x2="70" y2="50" stroke="#FDB813" stroke-width="3"/>
-                        <line x1="30" y1="60" x2="55" y2="60" stroke="#FDB813" stroke-width="3"/>
-                        <circle cx="50" cy="20" r="8" fill="none" stroke="#FDB813" stroke-width="3"/>
-                        <line x1="50" y1="28" x2="50" y2="30" stroke="#FDB813" stroke-width="3"/>
-                    </svg>
-                </div>
-                <h2 class="section-title">THE BATCAVE</h2>
-            </div>
-
-            <div class="bat-computer">
-                <div class="bat-computer-header">
-                    <span>◆ ADVANCED TECHNOLOGY DATABASE ◆</span>
-                    <div class="bat-computer-status">
-                        <span class="status-indicator active"></span>
-                        <span class="status-indicator active"></span>
-                        <span class="status-indicator active"></span>
-                        <span style="font-size: 1rem;">ALL SYSTEMS ONLINE</span>
-                    </div>
-                </div>
-                <div class="bat-computer-body">
-                    <div class="code-line"><span class="code-keyword">const</span> <span class="code-class">batcave_arsenal</span> = {</div>
-                    <div class="code-line">    <span class="code-string">primary_languages</span>: [<span class="code-string">"Python"</span>, <span class="code-string">"JavaScript"</span>, <span class="code-string">"C++"</span>, <span class="code-string">"SQL"</span>],</div>
-                    <div class="code-line">    <span class="code-string">data_fortresses</span>: [<span class="code-string">"PostgreSQL"</span>, <span class="code-string">"MongoDB"</span>],</div>
-                    <div class="code-line">    <span class="code-string">backend_armor</span>: [<span class="code-string">"Flask/FastAPI"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Express.js"</span>, <span class="code-string">"REST APIs"</span>],</div>
-                    <div class="code-line">    <span class="code-string">ai_weapons</span>: [<span class="code-string">"scikit-learn"</span>, <span class="code-string">"PySpark"</span>, <span class="code-string">"NumPy"</span>, <span class="code-string">"Pandas"</span>],</div>
-                    <div class="code-line">    <span class="code-string">data_bridges</span>: [<span class="code-string">"SQLAlchemy"</span>, <span class="code-string">"PyMongo"</span>],</div>
-                    <div class="code-line">    <span class="code-string">security_protocols</span>: [<span class="code-string">"JWT"</span>, <span class="code-string">"OAuth"</span>],</div>
-                    <div class="code-line">    <span class="code-string">deployment_gear</span>: [<span class="code-string">"Docker"</span>, <span class="code-string">"Git"</span>, <span class="code-string">"Linux"</span>],</div>
-                    <div class="code-line">    <span class="code-string">tactical_tools</span>: [<span class="code-string">"VS Code"</span>, <span class="code-string">"Postman"</span>, <span class="code-string">"pytest"</span>],</div>
-                    <div class="code-line">    <span class="code-string">data_pipelines</span>: [<span class="code-string">"ETL/ELT"</span>, <span class="code-string">"Apache Airflow"</span>],</div>
-                    <div class="code-line">    <span class="code-string">intelligence_viz</span>: [<span class="code-string">"Matplotlib"</span>, <span class="code-string">"Seaborn"</span>]</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="code-comment">// "I have one power. I never give up."</span></div>
-                </div>
+            <div style="text-align: center; margin-top: 3rem; display: flex; flex-wrap: wrap; justify-content: center;">
+                <a href="https://github.com/ck-ahmad" class="bat-button" target="_blank">EXPLORE GITHUB</a>
+                <a href="https://ahmadleo-tech.github.io/New_portfolio/" class="bat-button" target="_blank">VIEW PORTFOLIO</a>
             </div>
         </div>
     </section>
@@ -1379,10 +1660,9 @@
             </div>
 
             <div class="bat-card">
-                <div style="text-align: center; padding: 2rem 0;">
-                    <p style="font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--bat-gold); max-width: 900px; margin: 0 auto 3rem; font-style: italic;">
-                        "When that signal hits the sky, it's not just a call. It's a warning to those who prey on innovation. 
-                        The Dark Developer is watching. Ready to build systems that protect the innocent and bring order to digital chaos."
+                <div style="text-align: center; padding: 1.5rem 0;">
+                    <p style="font-family: 'Cinzel', serif; font-size: clamp(1rem, 3vw, 1.8rem); color: var(--bat-gold); max-width: 900px; margin: 0 auto 2rem; font-style: italic;">
+                        "When that signal hits the sky, it's not just a call. It's a warning. The Dark Developer is watching, ready to build systems that protect and bring order to digital chaos."
                     </p>
                 </div>
             </div>
@@ -1403,12 +1683,18 @@
                     <div class="contact-label">EMAIL</div>
                     <div class="contact-value">ahmadleo498@gmail.com</div>
                 </div>
+                <div class="contact-module">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-label">PORTFOLIO</div>
+                    <div class="contact-value">ahmadleo-tech.github.io</div>
+                </div>
             </div>
 
-            <div style="text-align: center; margin-top: 4rem;">
+            <div style="text-align: center; margin-top: 3rem; display: flex; flex-wrap: wrap; justify-content: center;">
                 <a href="https://github.com/ck-ahmad" class="bat-button" target="_blank">GITHUB</a>
                 <a href="https://linkedin.com/in/ahmad0763" class="bat-button" target="_blank">LINKEDIN</a>
                 <a href="mailto:ahmadleo498@gmail.com" class="bat-button" target="_blank">EMAIL</a>
+                <a href="https://ahmadleo-tech.github.io/New_portfolio/" class="bat-button" target="_blank">PORTFOLIO</a>
             </div>
         </div>
     </section>
@@ -1423,20 +1709,22 @@
                 </svg>
             </div>
             <p class="footer-title">THE DARK DEVELOPER</p>
-            <p class="footer-quote">"A hero can be anyone. Even a man doing something as simple and reassuring as writing clean code."</p>
-            <p class="footer-copyright">© 2026 AHMAD ABDULLAH • GOTHAM'S PROTECTOR • POWERED BY DETERMINATION</p>
-            <p class="footer-copyright" style="margin-top: 1rem;">BATMAN™ INSPIRED • JUSTICE THROUGH CODE</p>
+            <p class="footer-quote">"A hero can be anyone. Even a man writing clean code to make the world better."</p>
+            <p class="footer-copyright">© 2026 AHMAD ABDULLAH • FAST NUCES '27 • 2× HACKATHON WINNER</p>
+            <p class="footer-copyright" style="margin-top: 0.5rem;">BATMAN™ INSPIRED • JUSTICE THROUGH CODE</p>
         </div>
     </footer>
 
     <script>
-        // Enhanced parallax for bat signal
-        document.addEventListener('mousemove', (e) => {
-            const signal = document.querySelector('.bat-signal-container');
-            const moveX = (e.clientX - window.innerWidth / 2) / 30;
-            const moveY = (e.clientY - window.innerHeight / 2) / 30;
-            signal.style.transform = `translate(calc(-50% + ${moveX}px), ${moveY}px)`;
-        });
+        // Disable parallax on mobile for better performance
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const signal = document.querySelector('.bat-signal-container');
+                const moveX = (e.clientX - window.innerWidth / 2) / 30;
+                const moveY = (e.clientY - window.innerHeight / 2) / 30;
+                signal.style.transform = `translate(calc(-50% + ${moveX}px), ${moveY}px)`;
+            });
+        }
 
         // Lightning strike effect
         function triggerLightning() {
@@ -1454,10 +1742,10 @@
             }
         }, 10000);
 
-        // Scroll animations with dramatic entrance
+        // Scroll animations
         const observerOptions = {
             threshold: 0.15,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1469,10 +1757,9 @@
             });
         }, observerOptions);
 
-        // Observe elements with staggered delays
         document.querySelectorAll('.bat-card, .bat-computer, .stat-module, .timeline-item, .project-module, .contact-module').forEach((el, index) => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(80px) scale(0.9)';
+            el.style.transform = 'translateY(50px) scale(0.95)';
             el.style.transition = `all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s`;
             observer.observe(el);
         });
@@ -1485,7 +1772,7 @@
             }, 2000 + (i * 500));
         });
 
-        // Dramatic page load
+        // Page load
         window.addEventListener('load', () => {
             setTimeout(() => {
                 triggerLightning();
